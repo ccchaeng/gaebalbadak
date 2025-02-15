@@ -1,7 +1,7 @@
 import React from 'react'
 import Header from '../components/header/Header'
 
-function Home() {
+function collaboration() {
   return (
     <div>
         <Header />
@@ -9,4 +9,4 @@ function Home() {
   )
 }
 
-export default Home
+export default collaboration
