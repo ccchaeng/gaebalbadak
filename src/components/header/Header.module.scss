@@ -1,15 +1,17 @@
 .header {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
+    
+    padding: 10px 20px;
 
-    &__logo {
+    &__left {
         display: flex;
         align-items: center;
         justify-content: flex-start;
 
         padding: 10px;
-        padding-left: 50px;
+        padding-left: 0px;
 
         font-weight: 700;
         font-size: 28px;
@@ -17,15 +19,61 @@
         img {
             width: 35px;
             height: 35px;
+            object-fit: contain;
+            margin-right: 10px;
         }
     }
 
+    &__center {
+        flex-grow: 1;
+        display: flex;
+        justify-content: center;
+    }
+
     &__search {
-        width: 400px;
-        margin-left: 20px;
-        padding: 8px 12px;
-        font-size: 16px;
+        width: 500px;
+        padding: 8px;
         border: 1px solid #ccc;
         border-radius: 20px;
+    }
+
+    &__nav {
+        display: flex;
+        gap: 20px;
+    }
+
+    &__nav a {
+        color: black;
+        text-decoration: none;
+        font-size: 16px;
+        transition: color 0.3s ease;
+    }
+
+    &__nav a:hover {
+        color: #00bcd4;
+    }
+
+    &__authGroup {
+        display: flex;
+        gap: 10px;
+        margin-left: 40px;
+    }
+
+    &__authButton {
+        background-color: #919191;
+        color: white;
+        border: none;
+        padding: 5px 8px;
+        border-radius: 6px;
+        font-size: 16px;
+        line-height: 1; /* 버튼 높이 조정 */
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        display: inline-flex; /* 텍스트 높이에 맞게 정렬 */
+        align-items: center; /* 버튼 내부 텍스트 정렬 */
+    }
+
+    &__authButton:hover {
+        background-color: #00bcd4;
     }
 }
