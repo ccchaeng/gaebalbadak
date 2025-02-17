@@ -42,15 +42,16 @@ html, body {
 
     /* 검색창 가운데 정렬 */
     &__center {
-        flex-grow: 1;
+        position: relative;
         display: flex;
+        align-items: center;
         justify-content: center; /* 💡 검색창을 중앙에 배치 */
     }
 
     /* 검색창 스타일 */
     &__search {
         width: 500px;
-        max-width: 80%; /* 💡 화면이 작을 때 자동 줄어들도록 */
+        max-width: 100%; /* 💡 화면 크기에 맞게 조정 */
         padding: 8px 40px 8px 15px; /* 💡 오른쪽 패딩을 추가해서 돋보기 아이콘 공간 확보 */
         border: 1px solid #ccc; /* 💡 테두리 색상 */
         border-radius: 20px; /* 💡 둥근 모서리 */
@@ -59,7 +60,7 @@ html, body {
     /* 돋보기 아이콘 스타일 */
     &__searchIcon {
         position: absolute; /* 💡 검색창 내부 위치 설정 */
-        right: 540px; /* 💡 오른쪽 끝에 배치 (검색창 너비에 따라 조정 필요) */
+        right: 15px; /* 💡 오른쪽 끝에 배치 (검색창 너비에 따라 조정 필요) */
         top: 50%;
         transform: translateY(-50%); /* 💡 정확한 중앙 정렬 */
         width: 20px; /* 💡 아이콘 크기 */
@@ -121,7 +122,7 @@ html, body {
     width: 100%;
     height: 350px; /* 💡 기본 높이 설정 */
     background-size: cover; /* 💡 배경 이미지를 컨테이너 크기에 맞게 조정 */
-    background-position: center; /* 💡 배경 이미지를 중앙 정렬 */
+    background-position: center bottom 20px; /* 💡 배경 이미지를 중앙 정렬 */
     background-repeat: no-repeat;
     display: flex;
     align-items: center; /* 💡 텍스트를 수직 중앙 정렬 */
@@ -137,7 +138,7 @@ html, body {
         display: flex;
         align-items: center;
         width: 100%;
-        margin-top: -55px; /* 💡 글자를 더 위로 올림 */
+        margin-top: -80px; /* 💡 글자를 더 위로 올림 */
         font-size: 17px; /* 💡 글자 크기 */
     }
 
