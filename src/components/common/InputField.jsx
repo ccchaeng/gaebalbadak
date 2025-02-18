@@ -1,22 +1,16 @@
 import React from "react";
+import styles from "./InputField.module.scss"; // 입력 필드 SCSS 모듈
 
-// 코드 재사용을 위한 props
-const InputField = ({ label, type, name, value, onChange }) => {
+const InputField = ({ label, type, name, value, onChange, className }) => {
     return (
-        <div style={{ marginBottom: "10px" }}>
-            <label>{label}</label> {/* 입력 필드 라벨 */}
+        <div className={`${styles.inputContainer} ${className}`}>
+            <label className={styles.label}>{label}</label>
             <input
-                type={type} // input 타입 (email, text, password 등등...)
+                type={type} // 입력 필드 타입
                 name={name} // name 속성
                 value={value} // 입력된 값
-                onChange={onChange} // 값이 변경될 때 실행되는 이벤트
-                style={{
-                    width: "100%",
-                    padding: "8px",
-                    marginTop: "5px",
-                    borderRadius: "5px",
-                    border: "1px solid #ccc",
-                }}
+                onChange={onChange} // 값 변경 시 실행되는 이벤트
+                className={styles.input} // 공통 스타일
             />
         </div>
     );
