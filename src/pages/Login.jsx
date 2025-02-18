@@ -13,13 +13,14 @@ const Login = () => {
   };
 
   return (
-    <div className={styles.loginPage}>
-      <div className={styles.loginContainer}>
-        <h2>로그인</h2>
-        <InputField className={styles.loginInput} label="이메일" type="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-        <InputField className={styles.loginInput} label="비밀번호" type="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-        <Button text="Log In" onClick={handleLogin} className={styles.loginButton} />
-        <p className={styles.loginFooter}>회원이 아니십니까? <a href="/signup">Sign Up</a></p>
+    <div className={styles.login}>
+      <div className={styles.container}>
+        <h2 className={styles.container__title}>로그인</h2>
+        <div className={styles.container__divider}></div>
+        <InputField label="이메일" type="email" name="email" value={email} onChange={(e) => setEmail(e.target.value) } className={styles.container__input} />
+        <InputField label="비밀번호" type="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} className={styles.container__input} />
+        <Button text="Log In" onClick={handleLogin} className={styles.container__button} />
+        <p className={styles.container__footer}>회원이 아니십니까?&nbsp;<a href="/signup">Sign Up</a></p>
       </div>
     </div>
   );
