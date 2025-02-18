@@ -13,7 +13,7 @@ html, body {
     position: absolute; /* 💡 상단 고정 */
     top: 0;
     left: 0;
-    height: 60px;
+    height: 50px;
     width: 100%;
     max-width: 100vw; /* 💡 화면을 넘지 않도록 제한 */
     display: flex;
@@ -136,7 +136,7 @@ html, body {
 /* ====== 배너 스타일 ====== */
 .banner {
     width: 100%;
-    height: 350px; /* 💡 기본 높이 설정 */
+    height: 310px; /* 💡 기본 높이 설정 */
     background-size: cover; /* 💡 배경 이미지를 컨테이너 크기에 맞게 조정 */
     background-position: center bottom 20px; /* 💡 배경 이미지를 중앙 정렬 */
     background-repeat: no-repeat;
