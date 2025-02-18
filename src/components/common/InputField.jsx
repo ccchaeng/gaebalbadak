@@ -10,7 +10,7 @@ const InputField = ({ label, type, name, value, onChange, className }) => {
                 name={name} // name 속성
                 value={value} // 입력된 값
                 onChange={onChange} // 값 변경 시 실행되는 이벤트
-                className={styles.input} // 공통 스타일
+                className={`${styles.input} ${className}`} // 공통 스타일
             />
         </div>
     );
