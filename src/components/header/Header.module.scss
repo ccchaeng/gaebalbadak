@@ -28,11 +28,7 @@ html, body {
     &__left {
         display: flex;
         align-items: center;
-        justify-content: flex-start; /* 💡 왼쪽 정렬 */
-        padding: 10px;
-        padding-left: 0px;
-        font-weight: 700; /* 💡 글씨 두껍게 */
-        font-size: 28px; /* 💡 글자 크기 */
+        gap: 8px;
         color: white; /* 💡 글자 색상 */
 
         img {
@@ -41,6 +37,23 @@ html, body {
             object-fit: contain; /* 💡 이미지 비율 유지 */
             margin-right: 10px; /* 💡 로고와 텍스트 사이 여백 */
         }
+    }
+
+    &__logoLink {
+        display: flex;
+        align-items: center;
+    }
+
+    &__textLink {
+        text-decoration: none;
+    }
+
+    &__text {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #fff;
+        position: relative;
+        margin-top: -5px;
     }
 
     /* 검색창 가운데 정렬 */
