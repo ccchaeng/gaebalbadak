@@ -1,0 +1,15 @@
+.loginButton {
+    background-color: #7FD1AE;
+    color: white;
+  
+    &:hover {
+      background-color: #6db696;
+    }
+  }
+  
+  .loginContainer {
+    width: 300px;
+    margin: auto;
+    text-align: center;
+  }
+  
