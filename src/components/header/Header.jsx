@@ -10,8 +10,12 @@ function Header() {
     <div>
       <header className={styles.header}>
         <div className={styles.header__left}>
-          <img src={logo} alt="개발바닥" className={styles.header__logo} />
-          <span>GAEBALBADAK</span>
+          <Link to="/" className={styles.header__logoLink}>
+            <img src={logo} alt="개발바닥" className={styles.header__logo} />
+          </Link>
+          <Link to="/" className={styles.header__textLink}>
+            <span className={styles.header__text}>GAEBALBADAK</span>
+          </Link>
         </div>
         <div className={styles.header__center}>
           <input className={styles.header__search} type="text" placeholder="지금 바로 검색해 보세요."/>
