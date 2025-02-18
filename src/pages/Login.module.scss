@@ -1,61 +1,89 @@
-.loginPage {
+.login {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        width: 420px;
+        height: 500px;
+
+        border: 1px solid black;
+        border-radius: 20px;
+
+        padding: 20px;
+
+        &__title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        &__divider {
+            width: 90%;
+            height: 1px;
+            background-color: #909090;
+        }
+
+        &__input {
+            width: 300px;
+            height: 50px;
+
+            border-radius: 10px;
+
+            padding: 10px;
+
+            margin-top: 15px;
+        }
+
+        &__button {
+            width: 200px;
+            height: 40px;
+
+            background-color: #7FD1AE;
+            color: black;
+
+            font-size: 20px;
+            font-weight: 400;
+
+            cursor: pointer;
+
+            border-radius: 15px;
+
+            transition: background-color 0.3s;
+            
+            margin-top: 150px;
+
+            &:hover {
+                background-color: #6db696;
+            }
+        }
+
+        &__footer {
+            display: flex;
+            justify-content: flex-start;
+            
+            width: 100%;
+
+            font-size: 14px;
+            padding: 10px 20px;
+
+            box-sizing: border-box;
+
+            a {
+                color: #007F86;
+                text-decoration: none;
+                font-weight: bold;
+                margin-left: 5px;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
 }
-
-.loginContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    width: 620px;
-    height: 800px;
-
-    border: 1px solid #909090;
-    border-radius: 20px;
-  }
-
-.loginButton {
-    width: 450px;
-    height: 82px;
-
-    background-color: #7FD1AE;
-    color: black;
-
-    font-size: 28px;
-    font-weight: 400;
-
-    cursor: pointer;
-
-    border-radius: 20px;
-  
-    &:hover {
-      background-color: #6db696;
-    }
-  }
-
-  .loginInput {
-    width: 450px;
-    height: 82px;
-
-    border-radius: 20px;
-  }
-
-  .loginFooter {
-    margin-top: 20px;
-    font-size: 16px;
-    a {
-      color: #007F86;
-      text-decoration: none;
-      font-weight: bold;
-  
-      &:hover {
-        text-decoration: underline;
-      }
-    }
-  }
-
-
-  
