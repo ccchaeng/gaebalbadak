@@ -5,6 +5,7 @@ function Question() {
   return (
     <div>
         <Header />
+        질문할래
     </div>
   )
 }

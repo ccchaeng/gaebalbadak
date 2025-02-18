@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from './pages/Home';
+import Home from './pages/home';
 import Question from './pages/Question';
 import Collaboration from './pages/Collaboration';
 import Apply from './pages/Apply';
