@@ -1,4 +1,4 @@
-.login {
+.signup {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -10,7 +10,7 @@
         align-items: center;
 
         width: 300px;
-        height: 430px;
+        height: 500px;
 
         border: 1px solid black;
         border-radius: 20px;
@@ -27,7 +27,6 @@
             width: 90%;
             height: 1px;
             background-color: #909090;
-            margin-bottom: 15px;
         }
 
         &__input {
@@ -36,7 +35,6 @@
 
             font-size: 15px;
             font-weight: 100;
-            
 
             border-radius: 10px;
 
@@ -61,8 +59,8 @@
             border-radius: 15px;
 
             transition: background-color 0.3s;
-            
-            margin-top: 50px;
+
+            margin-top: 40px;
 
             &:hover {
                 background-color: #6db696;
@@ -72,14 +70,14 @@
         &__footer {
             display: flex;
             justify-content: flex-start;
-            
+
             width: 100%;
 
             font-size: 13px;
             padding: 10px 20px;
 
             box-sizing: border-box;
-            margin-right: 18px;
+            margin-top: 27px;
 
             a {
                 color: #007F86;
