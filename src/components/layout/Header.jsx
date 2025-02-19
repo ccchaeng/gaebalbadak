@@ -52,7 +52,6 @@ function Header() {
             <p>세상을 움직이는 코드, 여기서 시작됩니다.</p>
           </div>
         </div>
-        
       </section>
     </div>
   );
