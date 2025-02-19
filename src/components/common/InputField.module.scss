@@ -1,0 +1,19 @@
+.inputContainer {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+
+    &__label{
+        font-weight: bold;
+    }
+
+    &__input {
+        width: 100%;
+        padding: 8px;
+        margin-top: 5px;
+        border-radius: 5px;
+        border: 1px solid black;
+        transition: border-color 0.3s;
+      }
+  }
+  
