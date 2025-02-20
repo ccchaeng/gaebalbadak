@@ -1,13 +1,12 @@
 import React from 'react'
 import Header from '../components/layout/Header'
 
-function collaboration() {
+function Collaboration() {
   return (
     <div>
-        <Header />
         같이할래
     </div>
   )
 }
 
-export default collaboration
+export default Collaboration
