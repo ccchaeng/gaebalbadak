@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Layout from './components/layout/Layout'; // Layout 가져오기
+import Layout from './components/layout/Layout';
 import Home from './pages/home';
 import Question from './pages/Question';
 import Collaboration from './pages/Collaboration';

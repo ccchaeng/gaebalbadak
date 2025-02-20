@@ -1,7 +1,6 @@
-// src/components/layout/Layout.jsx
 import React from "react";
-import Header from "./Header"; // Header 가져오기
-import Footer from "./Footer"; // Footer 가져오기
+import Header from "./Header";
+import Footer from "./Footer";
 
 const Layout = ({ children }) => {
   return (
