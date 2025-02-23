@@ -1,24 +1,41 @@
 .searchBar {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center; /* 💡 검색창을 중앙에 배치 */
-  }
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* 💡 검색창을 중앙 정렬 */
+  width: 100%;
+  max-width: 800px; /* 💡 최대 가로 길이 증가 */
+  margin: 0 auto; /* 💡 중앙 정렬 */
+}
+
+.searchInput {
+  width: 100%;
+  max-width: 700px; /* 💡 최대 너비 설정 */
+  padding: 8px 40px 8px 15px; /* 💡 오른쪽 패딩을 추가해서 돋보기 아이콘 공간 확보 */
+  border: 1px solid #ccc;
+  border-radius: 50px; /* 💡 더 둥글게 변경 */
+  font-size: 16px;
+  transition: all 0.3s ease-in-out;
   
-  .searchInput {
-    width: 500px;
-    max-width: 100%; /* 💡 화면 크기에 맞게 조정 */
-    padding: 8px 40px 8px 15px; /* 💡 오른쪽 패딩을 추가해서 돋보기 아이콘 공간 확보 */
-    border: 1px solid #ccc; /* 💡 테두리 색상 */
-    border-radius: 20px; /* 💡 둥근 모서리 */
+  &:focus {
+      outline: none;
+      border-color: #00bcd4; /* 💡 포커스 시 테두리 색 변경 */
+      box-shadow: 0 0 5px rgba(0, 188, 212, 0.5); /* 💡 부드러운 포커스 효과 */
   }
-  
-  .searchIcon {
-    position: absolute; /* 💡 검색창 내부 위치 설정 */
-    right: 15px; /* 💡 오른쪽 끝에 배치 (검색창 너비에 따라 조정 필요) */
-    top: 50%;
-    transform: translateY(-50%); /* 💡 정확한 중앙 정렬 */
-    width: 20px; /* 💡 아이콘 크기 */
-    height: 20px;
-    cursor: pointer; /* 💡 클릭 가능하도록 설정 */
+}
+
+.searchIcon {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: auto;
+  height: 60%; /* 💡 검색창 크기에 맞춰 자동 조절 */
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.3s ease-in-out;
+
+  &:hover {
+      opacity: 1; /* 💡 마우스 오버 시 선명하게 */
   }
+}
