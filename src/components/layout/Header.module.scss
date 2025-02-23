@@ -9,7 +9,7 @@ html, body {
 }
 
 .header {
-    position: fixed; /* 💡 항상 화면 상단에 고정 */
+    position: absolute; /* 💡 항상 화면 상단에 고정 */
     top: 0;
     left: 0;
     min-height: 50px; /* 💡 최소 높이 지정 (내용이 많아지면 자동 조정) */
@@ -62,5 +62,14 @@ html, body {
 
     &__nav {
         margin-left: 30px;
+    }
+
+    &__banner {
+        display: flex;
+        align-items: center;
+        justify-content: center; /* 💡 텍스트를 중앙 정렬 */
+        text-align: center;
+        padding: 40px 20px; /* 💡 위아래 여백 추가 */
+        margin-top: -20px;
     }
 }
