@@ -21,7 +21,6 @@
     display: flex;
     gap: 10px; /* 💡 버튼 간격 */
     flex-wrap: wrap;
-    /* ❌ margin-left 제거 (위치는 부모에서 조정) */
 }
 
 .authButton {
