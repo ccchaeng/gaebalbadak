@@ -2,9 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styles from "./NavBar.module.scss";
 
-function NavBar() {
+function NavBar({ className = "" }) {
   return (
-    <nav className={styles.navBar}>
+    <nav className={`${styles.navBar} ${className}`}>
       <Link to="/question">질문할래</Link>
       <Link to="/collaboration">같이할래</Link>
       <Link to="/apply">신청할래</Link>

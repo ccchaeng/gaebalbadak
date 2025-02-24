@@ -1,48 +1,48 @@
 /* ====== 전체 페이지 설정 ====== */
-/* 가로 스크롤 방지 */
+/* 가로 스크롤이 생기지 않도록 설정 */
 html, body {
     margin: 0;
     padding: 0;
     width: 100%;
-    max-width: 100vw; /* 💡 뷰포트 초과 방지 */
-    overflow-x: hidden;
+    max-width: 100vw; /* 💡 뷰포트 너비를 초과하지 않도록 설정 */
+    overflow-x: hidden; /* 💡 가로 스크롤 없애기 */
 }
 
 .header {
-    position: absolute; /* 💡 항상 화면 상단에 고정 */
-    top: 0;
-    left: 0;
-    min-height: 50px; /* 💡 최소 높이 지정 (내용이 많아지면 자동 조정) */
+    position: absolute; /* 💡 상단 고정 */
+    height: 50px;
     width: 100%;
-    max-width: 100vw; /* 💡 화면 초과 방지 */
+    max-width: 100vw; /* 💡 화면을 넘지 않도록 제한 */
     display: flex;
-    justify-content: space-between; /* 💡 요소들을 좌우 정렬 */
+    justify-content: space-between; /* 💡 요소들을 좌우로 정렬 */
     align-items: center; /* 💡 수직 중앙 정렬 */
-    padding: 10px 15px; /* 💡 내부 여백 */
-    z-index: 1000; /* 💡 다른 요소 위에 표시 (더 높은 z-index 설정) */
+    padding: 10px 15px; /* 💡 헤더 내부 여백 */
+    z-index: 10; /* 💡 다른 요소 위에 표시 */
     box-sizing: border-box; /* 💡 패딩과 보더 포함 크기 유지 */
+    overflow: hidden; /* 💡 넘치는 요소 숨김 */
 
     &__left {
         display: flex;
         align-items: center;
         gap: 8px;
-        color: white;
+        color: white; /* 💡 글자 색상 */
     
         img {
-            width: 35px;
+            width: 35px; /* 💡 로고 크기 */
             height: 35px;
-            object-fit: contain;
-            margin-right: 10px;
+            object-fit: contain; /* 💡 이미지 비율 유지 */
+            margin-right: 10px; /* 💡 로고와 텍스트 사이 여백 */
         }
-    }
+      }
 
     &__center {
-        flex-grow: 1; /* 💡 검색창이 자연스럽게 늘어나도록 설정 */
+        flex: 1; /* ✅ 검색창이 가로로 확장되도록 설정 */
         display: flex;
         justify-content: center;
-        max-width: 600px; /* 💡 검색창이 너무 길어지지 않도록 제한 */
+        max-width: 100%;
+        width: 100%;
     }
-
+    
     &__logoLink {
         display: flex;
         align-items: center;
@@ -60,16 +60,20 @@ html, body {
         margin-top: -5px;
     }
 
-    &__nav {
-        margin-left: 30px;
-    }
+}
 
-    &__banner {
-        display: flex;
-        align-items: center;
-        justify-content: center; /* 💡 텍스트를 중앙 정렬 */
-        text-align: center;
-        padding: 40px 20px; /* 💡 위아래 여백 추가 */
-        margin-top: -20px;
-    }
+.bannerWrapper {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto; /* 💡 배너를 중앙 정렬 */
+    padding-top: 20px; /* 💡 배너와 헤더 사이 여백 */
+}
+
+.customBanner div {
+    margin-top: -30px !important; /* ✅ 텍스트를 위로 이동 */
+    padding-left: 10px;
+}
+
+.customNavBar a {
+    margin-left: 5px; /* 💡 왼쪽으로 조금 이동 */
 }
