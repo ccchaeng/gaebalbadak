@@ -3,6 +3,9 @@ import InputField from "../components/common/InputField";
 import Button from "../components/common/Button";
 import styles from "./Login.module.scss";
 
+// 라우터를 위함
+import { useNavigate } from "react-router-dom";
+
 // firebase 로그인
 import { auth } from "../firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
@@ -10,12 +13,14 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate;
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       console.log("로그인 성공: ", userCredential);
+      navigate("/home");
     } catch (error) {
       console.log("로그인 실패: ", error.message);
       alert(`로그인 실패하였습니다.`);
