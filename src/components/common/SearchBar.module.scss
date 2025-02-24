@@ -34,8 +34,4 @@
   cursor: pointer;
   opacity: 0.7;
   transition: opacity 0.3s ease-in-out;
-
-  &:hover {
-      opacity: 1; /* 💡 마우스 오버 시 선명하게 */
-  }
 }

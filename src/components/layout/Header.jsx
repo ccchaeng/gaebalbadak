@@ -32,12 +32,8 @@ function Header() {
       </header>
 
       {/* 배너 (props로 데이터 전달) */}
-      <Banner 
-      image={bannerImage} 
-      title="개발자들의 바닥까지 파헤치는 공간," 
-      description="세상을 움직이는 코드, 여기서 시작됩니다." 
-      className={styles.header__banner} 
-      />
+      <Banner image={bannerImage} title="개발자들의 바닥까지 파헤치는 공간," description="세상을 움직이는 코드, 여기서 시작됩니다." className={styles.header__banner} />
+
     </div>
   );
 }
