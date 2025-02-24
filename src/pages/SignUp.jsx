@@ -25,7 +25,8 @@ function SignUp() {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       await updateProfile(userCredential.user, { displayName: name });
       console.log("회원가입 성공: ", userCredential.user);
-      alert(`${name} 님, 환영합니다!`);
+      alert(`${name} 님, 환영합니다! 로그인 후 서비스를 이용하세요.`);
+      navigate("/login"); // 로그인 페이지로 이동
     } catch (error) {
       console.error("회원가입 실패: ", error.message);
       alert(`회원가입 실패: ${error.message}`);
