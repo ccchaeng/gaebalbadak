@@ -10,8 +10,6 @@ html, body {
 
 .header {
     position: absolute; /* 💡 상단 고정 */
-    top: 0;
-    left: 0;
     height: 50px;
     width: 100%;
     max-width: 100vw; /* 💡 화면을 넘지 않도록 제한 */
@@ -53,4 +51,21 @@ html, body {
         position: relative;
         margin-top: -5px;
     }
+
+}
+
+.bannerWrapper {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto; /* 💡 배너를 중앙 정렬 */
+    padding-top: 20px; /* 💡 배너와 헤더 사이 여백 */
+}
+
+.customBanner div {
+    margin-top: -25px !important; /* ✅ 텍스트를 위로 이동 */
+    padding-left: 10px;
+}
+
+.customNavBar a {
+    margin-left: 5px; /* 💡 왼쪽으로 조금 이동 */
 }
