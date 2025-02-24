@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../../assets/dog_logo.png";
+import bannerImage from "../../assets/banner2.jpg";
 import styles from "./Header.module.scss";
 import SearchBar from "../common/SearchBar";
 import NavBar from "../common/NavBar";
@@ -27,12 +28,12 @@ function Header() {
         </div>
 
         {/* 네비게이션 */}
-        <NavBar />
+        <NavBar className={styles.customNavBar} />
       </header>
 
-      {/* 배너 */}
-      <Banner />
-      
+      {/* 배너 (props로 데이터 전달) */}
+      <Banner image={bannerImage} title="개발자들의 바닥까지 파헤치는 공간," description="세상을 움직이는 코드, 여기서 시작됩니다." className={styles.customBanner} />
+
     </div>
   );
 }

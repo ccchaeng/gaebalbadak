@@ -1,39 +1,26 @@
-/* ====== 배너 스타일 ====== */
 .banner {
     width: 100%;
-    height: 310px; /* 💡 기본 높이 설정 */
-    background-size: cover; /* 💡 배경 이미지를 컨테이너 크기에 맞게 조정 */
-    background-position: center bottom 20px; /* 💡 배경 이미지를 중앙 정렬 */
+    height: 300px; /* 💡 기본 높이만 설정 */
+    background-size: cover;
+    background-position: center bottom 20px;
     background-repeat: no-repeat;
     display: flex;
-    align-items: center; /* 💡 텍스트를 수직 중앙 정렬 */
-    justify-content: flex-start; /* 💡 왼쪽 정렬 */
+    align-items: center;
+    justify-content: flex-start;
     text-align: left;
     color: white;
-    position: relative;
     z-index: 1;
-    padding-left: 30px; /* 💡 왼쪽 여백 추가 */
-
-    /* 배너 내부 컨텐츠 정렬 */
-    &__contentWrapper {
-        display: flex;
-        align-items: center;
-        width: 100%;
-        margin-top: -300px; /* 💡 글자를 더 위로 올림 */
-        font-size: 17px; /* 💡 글자 크기 */
-    }
-
-    /* 배너 내용 스타일 */
-    &__content {
-        max-width: 600px; /* 💡 글이 너무 길어지지 않도록 제한 */
-    }
+    padding-left: 0; 
+    position: static;
+    margin-bottom: 0;
 }
+
 
 /* ====== 배너 중간에 흰색 줄 추가 ====== */
 .banner::after {
     content: "";
     position: absolute;
-    top: 17%; /* 💡 배너의 중간보다 위쪽에 흰색 줄 위치 */
+    top: 6.5%; /* 💡 배너의 중간보다 위쪽에 흰색 줄 위치 */
     left: 0;
     width: 100%; /* 💡 배너 전체 너비 */
     height: 3px; /* 💡 줄 두께 */
