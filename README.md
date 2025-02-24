@@ -5,3 +5,5 @@
 3. `npm install -D sass`
 
 4. `npm install react`
+
+5. `npm install react-router-dom`
