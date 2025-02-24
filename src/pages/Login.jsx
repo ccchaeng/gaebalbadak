@@ -13,14 +13,14 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate;
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       console.log("로그인 성공: ", userCredential);
-      navigate("/home");
+      navigate("/home"); // home 페이지로 이동
     } catch (error) {
       console.log("로그인 실패: ", error.message);
       alert(`로그인 실패하였습니다.`);

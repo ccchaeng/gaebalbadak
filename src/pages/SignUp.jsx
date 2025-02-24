@@ -2,6 +2,9 @@ import React, { use, useState } from 'react'
 
 import styles from "./SignUp.module.scss"
 
+// 라우터 
+import { useNavigate } from 'react-router-dom'
+
 // 컴포넌트
 import Button from '../components/common/Button'
 import InputField from '../components/common/InputField'
@@ -14,6 +17,7 @@ function SignUp() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleSignUp = async (e) => {
     e.preventDefault();
