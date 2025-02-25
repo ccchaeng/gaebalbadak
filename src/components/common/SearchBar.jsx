@@ -2,9 +2,9 @@ import React from "react";
 import searchIcon from "../../assets/search.png";
 import styles from "./SearchBar.module.scss";
 
-function SearchBar() {
+function SearchBar({ className }) {
   return (
-    <div className={styles.searchBar}>
+    <div className={`${styles.searchBar} ${className}`}>
       <input  className={styles.searchInput} type="text" placeholder="지금 바로 검색해 보세요." />
       <img src={searchIcon} alt="search" className={styles.searchIcon} />
     </div>

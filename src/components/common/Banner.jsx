@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Banner.module.scss";
 
-const Banner = ({ image, title, description, className = "" }) => {
+const Banner = ({ image, title, description, className }) => {
   return (
     <section className={`${styles.banner} ${className}`} style={{ backgroundImage: `url(${image})` }}>
       <div className={styles.bannerContentWrapper}>
