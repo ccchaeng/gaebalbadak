@@ -30,7 +30,7 @@ function SignUp() {
       // Authentication 프로필 업데이트
       await updateProfile(user, {
         displayName: name,
-        photoURL: "../assets/default_frofile.png"
+        photoURL: "/default_profile.png"
       });
 
       // Firestore에 사용자 데이터 저장
