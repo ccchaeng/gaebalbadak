@@ -1,24 +1,43 @@
 .searchBar {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center; /* 💡 검색창을 중앙에 배치 */
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* ✅ 검색창을 중앙 정렬 */
+  width: 100%; /* ✅ 부모 크기만큼 확장 */
+  max-width: 580px; /* ✅ 필요하면 더 크게 조절 가능 */
+  margin: 0 auto; /* ✅ 중앙 정렬 */
+}
+
+.searchInput {
+  width: 100%;
+  max-width: 100%;
+  height: 36px; /* ✅ 기존보다 줄인 높이 (기본적으로 40~50px일 가능성이 있음) */
+  padding: 4px 35x 4px 8px; /* ✅ 세로 여백 줄이기 */
+  border: 1px solid #ccc;
+  border-radius: 40px; /* ✅ 모서리는 그대로 둥글게 유지 */
+  font-size: 14px; /* ✅ 글자 크기 약간 축소 */
+  transition: all 0.3s ease-in-out;
+  text-indent: 10px;
+
+  &:focus {
+      outline: none;
+      border-color: #00bcd4;
+      box-shadow: 0 0 5px rgba(0, 188, 212, 0.5);
   }
-  
-  .searchInput {
-    width: 500px;
-    max-width: 100%; /* 💡 화면 크기에 맞게 조정 */
-    padding: 8px 40px 8px 15px; /* 💡 오른쪽 패딩을 추가해서 돋보기 아이콘 공간 확보 */
-    border: 1px solid #ccc; /* 💡 테두리 색상 */
-    border-radius: 20px; /* 💡 둥근 모서리 */
+}
+
+.searchIcon {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: auto;
+  height: 60%;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.3s ease-in-out;
+
+  &:hover {
+      opacity: 1;
   }
-  
-  .searchIcon {
-    position: absolute; /* 💡 검색창 내부 위치 설정 */
-    right: 15px; /* 💡 오른쪽 끝에 배치 (검색창 너비에 따라 조정 필요) */
-    top: 50%;
-    transform: translateY(-50%); /* 💡 정확한 중앙 정렬 */
-    width: 20px; /* 💡 아이콘 크기 */
-    height: 20px;
-    cursor: pointer; /* 💡 클릭 가능하도록 설정 */
-  }
+}

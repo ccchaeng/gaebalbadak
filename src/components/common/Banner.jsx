@@ -1,20 +1,17 @@
 import React from "react";
 import styles from "./Banner.module.scss";
 
-function Banner({ title, subtitle, backgroundImage, className = "" }) {
+const Banner = ({ image, title, description, className }) => {
   return (
-    <section
-      className={`${styles.banner} ${className}`}
-      style={{ backgroundImage: `url(${backgroundImage})` }}
-    >
+    <section className={`${styles.banner} ${className}`} style={{ backgroundImage: `url(${image})` }}>
       <div className={styles.bannerContentWrapper}>
         <div className={styles.bannerContent}>
           <h1>{title}</h1>
-          <p>{subtitle}</p>
+          <p>{description}</p>
         </div>
       </div>
     </section>
   );
-}
+};
 
 export default Banner;

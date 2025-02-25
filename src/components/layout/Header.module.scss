@@ -35,6 +35,14 @@ html, body {
         }
       }
 
+    &__center {
+        flex: 1; /* ✅ 검색창이 가로로 확장되도록 설정 */
+        display: flex;
+        justify-content: center;
+        max-width: 100%;
+        width: 100%;
+    }
+    
     &__logoLink {
         display: flex;
         align-items: center;

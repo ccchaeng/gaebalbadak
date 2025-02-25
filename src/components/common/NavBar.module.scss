@@ -9,20 +9,18 @@
 .navBar a {
     color: white;
     text-decoration: none; /* 💡 밑줄 제거 */
-    font-size: 16px; /* 💡 글자 크기 */
-    transition: color 0.3s ease; /* 💡 색상 변경 애니메이션 */
+    font-size: 16px;
+    transition: color 0.3s ease;
 }
 
 .navBar a:hover {
     color: #00bcd4; /* 💡 마우스 오버 시 색상 변경 */
 }
 
-
 .authGroup {
     display: flex;
     gap: 10px; /* 💡 버튼 간격 */
     flex-wrap: wrap;
-    margin-left: 20px; /* 💡 로그인/회원가입 버튼이 너무 오른쪽으로 가지 않도록 조정 */
 }
 
 .authButton {
@@ -30,7 +28,7 @@
     color: white;
     border: none;
     padding: 5px 8px;
-    border-radius: 6px; /* 💡 둥근 모서리 */
+    border-radius: 6px;
     font-size: 16px;
     line-height: 1;
     cursor: pointer;
@@ -40,5 +38,5 @@
 }
 
 .authButton:hover {
-    background-color: #00bcd4; /* 💡 마우스 오버 시 색상 변경 */
+    background-color: #00bcd4;
 }
