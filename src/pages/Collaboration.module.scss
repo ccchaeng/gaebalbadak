@@ -1,0 +1,83 @@
+.collaboration { 
+    width: 80%;
+    margin: auto;
+    font-family: "Arial", sans-serif;
+  
+    /* 모집 분야 탭 */
+    &__tabs {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      background: #fff;
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid #ddd;
+  
+      button {
+        padding: 8px 15px;
+        border: none;
+        background: transparent;
+        cursor: pointer;
+        font-size: 16px;
+        color: #666;
+  
+        /* 모집 분야 헤더에 세로 구분선 추가 */
+        &:first-child {
+          border-right: 2px solid #ddd;
+        }
+      }
+    }
+  
+    /* 게시판 테이블 */
+    &__table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid #ddd;
+  
+      thead {
+        background-color: #f8f8f8;
+        border-bottom: 2px solid #ccc;
+      }
+  
+      th, td {
+        border-bottom: 1px solid #ddd;
+        padding: 15px;
+        text-align: center;
+      }
+    }
+  
+    /* 페이지 */
+    &__pagination {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 8px;
+  
+      button {
+        padding: 8px 12px;
+        border: none;
+        background: #f0f0f0;
+        cursor: pointer;
+        border-radius: 5px;
+      }
+    }
+  
+    /* 글쓰기 버튼 */
+    &__write_button { 
+      display: block;
+      width: 100px;
+      padding: 10px;
+      background: #ccc;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: auto;
+    }
+  }
