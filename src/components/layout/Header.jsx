@@ -34,7 +34,7 @@ function Header() {
     < header />
       {/* 배너 */}
       <div className={styles.contentWrapper}>
-          <Banner title="개발자들의 바닥까지 파헤치는 공간," subtitle="세상을 움직이는 코드, 여기서 시작됩니다." backgroundImage={bannerImage} className={styles.customBanner}/>
+          <Banner title="개발자들의 바닥까지 파헤치는 공간," description="세상을 움직이는 코드, 여기서 시작됩니다." image={bannerImage} className={styles.customBanner}/>
         </div>    
       </div>
   );
