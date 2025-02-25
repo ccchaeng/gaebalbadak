@@ -9,8 +9,8 @@ import { onAuthStateChanged, signOut } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 
 function NavBar({ className = "" }) {
-  const [user ,setUser] = useState(null);
-  const [profile, setProfile] = useState({nickname: "", photoURL: ""});
+  const [user, setUser] = useState(null);
+  const [profile, setProfile] = useState({ nickname: "", photoURL: "" });
 
   // 로그인 상태 확인과 사용자 정보 불러오기
   useEffect(() => {
@@ -18,11 +18,11 @@ function NavBar({ className = "" }) {
       if (currentUser) {
         const docRef = doc(db, "users", currentUser.uid);
         const docSnap = await getDoc(docRef);
-        if(docSnap.exists()) setProfile(docSnap.data());
+        if (docSnap.exists()) setProfile(docSnap.data());
         setUser(currentUser);
       } else setUser(null);
     });
-    
+
     return () => unsubscribe();
   }, []);
 
@@ -37,12 +37,14 @@ function NavBar({ className = "" }) {
         {user ? (
           <>
             <div className={styles.profileContainer}>
-              <img
-                src={profile.photoURL || default_profile}
-                alt="프로필"
-                className={styles.profileImage}
-                title={profile.nickname || "사용자"}
-              />
+              <Link to="/profile">
+                <img
+                  src={profile.photoURL || default_profile}
+                  alt="프로필"
+                  className={styles.profileImage}
+                  title={profile.nickname || "사용자"}
+                />
+              </Link>
             </div>
           </>
         ) : (

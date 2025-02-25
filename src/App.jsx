@@ -7,6 +7,7 @@ import Collaboration from './pages/Collaboration';
 import Apply from './pages/Apply';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
+import Profile from './pages/Profile';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/question" element={<Question />} />
           <Route path="/collaboration" element={<Collaboration />} />
           <Route path="/apply" element={<Apply />} />
+          <Route path="/profile" element={<Profile />} />
         </Route>
 
         {/* Layout이 필요 없는 개별 페이지 */}
