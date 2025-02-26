@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "./NavBar.module.scss";
+
 import default_profile from "/default_profile.png"
+
+// 컴포넌트
+import ProfileImage from "./ProfileImage";
 
 // Firebase 관련 기능
 import { auth, db } from "../../firebase";
@@ -38,11 +42,10 @@ function NavBar({ className = "" }) {
           <>
             <div className={styles.profileContainer}>
               <Link to="/profile">
-                <img
-                  src={profile.photoURL || default_profile}
-                  alt="프로필"
-                  className={styles.profileImage}
-                  title={profile.nickname || "사용자"}
+                <ProfileImage 
+                  photoURL={profile.photoURL}
+                  nickname={profile.nickname}
+                  className={styles.ProfileImage}
                 />
               </Link>
             </div>
