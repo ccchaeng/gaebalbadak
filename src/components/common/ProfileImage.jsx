@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from "./Profile.module.scss"
+import styles from "./ProfileImage.module.scss"
 
 import default_profile from "/default_profile.png"
 
