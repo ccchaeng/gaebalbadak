@@ -1,0 +1,36 @@
+.customBanner div {
+    margin-top: 80px !important; /* ✅ 텍스트를 위로 이동 */
+    padding-left: 10px;
+    text-align: left;
+}
+
+.searchBarOverlay {
+    position: absolute;
+    top: 25px; /* 🔥 기존 값보다 줄여서 더 위로 이동 */
+    left: 45%;
+    transform: translate(-50%, -50%); /* 중앙 정렬 */
+    width: 100%;
+    max-width: 600px; /* 검색창 크기 제한 */
+    z-index: 10;
+  }
+
+  .bannerWrapper {
+    width: 100%;  /* 🔥 전체 너비 */
+    max-width: 100vw; /* 🔥 뷰포트 너비에 맞춤 */
+    min-height: 300px; /* 최소 높이 설정 */
+  }
+  
+  .customBanner {
+    padding-left: 10px;
+    display: block;
+    text-align: center;
+    width: 100%;
+    height: 30vh; /* 배너 높이를 지정하여 화면에 표시되도록 함 */
+    position: absolute;
+    top: 0; /* 배너를 화면 상단에 위치 */
+    left: 50%;
+    transform: translateX(-50%); /* 수평 중앙 정렬 */
+    background-size: cover; /* 배경 이미지가 커버되도록 설정 */
+    background-position: top; /* 배경 이미지를 위쪽으로 정렬 */
+  }
+  
