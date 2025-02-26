@@ -12,7 +12,7 @@ function Apply() {
         <Banner 
           image={bannerImage} 
           title="신청할래?" 
-          description="세상을 움직이는 코드, 여기서 시작됩니다." 
+          description="같이 도전하고 성장할 팀원을 찾아보세요!" 
           className={styles.customBanner}
         />
         <div className={styles.searchBarOverlay}>
