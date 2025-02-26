@@ -45,9 +45,9 @@ const Collaboration = () => {
       </div>
 
       {/* 글쓰기 버튼 */}
-      <button className={styles.collaboration__write_button}>글쓰기</button> {/* ✅ 수정: BEM 네이밍 일치 */}
+      <button className={styles.collaboration__write_button}>글쓰기</button> 
     </div>
   );
 };
 
-export default Collaboration;
+export default Collaboration; 
