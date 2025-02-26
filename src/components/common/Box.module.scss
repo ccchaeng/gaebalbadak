@@ -1,0 +1,29 @@
+.box {
+    display:flex;
+    width: 80%;
+    max-width: 1200px;
+    height: 200px;
+    padding: 100px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    position: absolute; /* 🔥 절대 위치 설정 */
+    top: 260px; /* 화면 위쪽에서 100px 아래로 */
+    left: 50px; /* 화면 왼쪽에서 50px 오른쪽으로 */
+  }
+  .innerBox1 {
+    flex: 1;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f8f9fa;
+  }
+  .innerBox2 {
+    flex: 1;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f8f9fa;
+  }

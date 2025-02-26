@@ -1,30 +1,23 @@
-
 .customBanner div {
+    margin-top: 80px !important; /* ✅ 텍스트를 위로 이동 */
     padding-left: 10px;
-    display: block;
-    text-align: center;
-    width: 100%; /* 전체 너비 차지 */
-    height: 100%; /* 전체 높이 차지 */
-    position: absolute; /* 요소를 중앙에 위치시키기 위해 absolute로 변경 */
-    top: 70%; /* 화면의 중앙으로 위치 */
-    left: 50%; /* 화면의 중앙으로 위치 */
-    transform: translate(-50%, -50%); /* 정확히 중앙에 배치 */
-    line-height: 0.5; /* 줄 간격을 조금 좁게 설정 (값을 더 줄이면 간격이 더 가까워짐) */
+    text-align: left;
 }
 
 .searchBarOverlay {
     position: absolute;
-    top: 70%; /* 배너 아래로 검색창 위치 조정 */
-    left: 50%;
+    top: 25px; /* 🔥 기존 값보다 줄여서 더 위로 이동 */
+    left: 45%;
     transform: translate(-50%, -50%); /* 중앙 정렬 */
     width: 100%;
-    max-width: 400px; /* 검색창 크기 제한 */
+    max-width: 600px; /* 검색창 크기 제한 */
     z-index: 10;
   }
 
   .bannerWrapper {
-    position: relative;
-    height: 35vh;
+    width: 100%;  /* 🔥 전체 너비 */
+    max-width: 100vw; /* 🔥 뷰포트 너비에 맞춤 */
+    min-height: 300px; /* 최소 높이 설정 */
   }
   
   .customBanner {
@@ -40,4 +33,4 @@
     background-size: cover; /* 배경 이미지가 커버되도록 설정 */
     background-position: top; /* 배경 이미지를 위쪽으로 정렬 */
   }
- 
+  
