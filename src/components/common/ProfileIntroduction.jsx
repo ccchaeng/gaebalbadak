@@ -5,7 +5,7 @@ import styles from './ProfileIntroduction.module.scss'
 import Button from './Button'
 
 const ProfileIntroduction = ({ intro, onSave }) => {
-    const [isEdit, setEdit] = useState(flase);
+    const [isEdit, setEdit] = useState(false);
     const [editIntro, setEditIntro] = useState(intro);
 
     return (
