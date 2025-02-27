@@ -12,7 +12,7 @@ const ProfileInfo = ({ user, onEdit }) => {
             <ProfileImage
                 photoURL={user.photoURL}
                 nickname={user.nickname}
-                className={styles.ProfileImage} />
+                className={styles.profileImage} />
             {/* 사용자 디테일 정보 */}
             <div className={styles.profileDetails}>
                 <p>{user.nickname}</p>

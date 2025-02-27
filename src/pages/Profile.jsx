@@ -31,12 +31,12 @@ const Profile = () => {
   const addProject = () => {
     setUser({
       ...user,
-      projects: [...user.projects, {image: "", description: "새로운 프로젝트"}],
+      projects: [...user.projects, { image: "", description: "새로운 프로젝트" }],
     });
   };
 
   return (
-    <div className={styles.homeContainer}>
+    <div className={styles.profileContainer}>
       {/* 배너 (검색창 포함) */}
       <div className={styles.bannerWrapper}>
         <Banner
@@ -50,12 +50,14 @@ const Profile = () => {
         </div>
       </div>
 
+      {/* 프로필 정보 & 자기소개 */}
       <div className={styles.profileContent}>
         <ProfileInfo user={user} onEdit={() => console.log("프로필 수정 기능 추가 예정")} />
         <ProfileIntroduction intro={user.intro} onSave={updateIntro} />
       </div>
 
-      <ProfileProject projects={user.projects} onAddProject={addProject}/>
+      {/* 프로젝트 리스트 */}
+      <ProfileProject projects={user.projects} onAddProject={addProject} />
     </div>
   );
 }
