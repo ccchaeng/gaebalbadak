@@ -1,11 +1,11 @@
-import React from 'react'
+import React from "react";
 import bannerImage from "../assets/banner3.jpg";
 import Banner from "../components/common/Banner";
 import SearchBar from "../components/common/SearchBar";
-import styles from "./Collaboration.module.scss";
+import styles from "./Collaboration.module.scss"; // 스타일 파일
+import Box from "../components/common/Box"; 
 
-
-function Collaboration() {
+const Collaboration = () => {
   return (
     <div className={styles.homeContainer}>
       {/* 🔥 배너 (검색창 오버레이 포함) */}
@@ -20,8 +20,9 @@ function Collaboration() {
           <SearchBar />
         </div>
       </div>
+      <Box></Box>
     </div>
   );
-}
+};
 
-export default Collaboration
+export default Collaboration;
