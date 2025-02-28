@@ -6,15 +6,16 @@ import Button from './Button'
 import ProfileImage from './ProfileImage'
 
 const ProfileInfo = ({ user, onEdit }) => {
+    
     return (
-        <div className={styles.profileContainer}>
+        <div className={styles.profile}>
             {/* 프로필 이미지 */}
             <ProfileImage
                 photoURL={user.photoURL}
                 nickname={user.nickname}
-                className={styles.profileImage} />
+                className={styles.profile__image} />
             {/* 사용자 디테일 정보 */}
-            <div className={styles.profileDetails}>
+            <div className={styles.profile__details}>
                 <p>{user.nickname}</p>
                 <p>{user.email}</p>
                 <p>열정 점수: </p>
