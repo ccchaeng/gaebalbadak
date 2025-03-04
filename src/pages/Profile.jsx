@@ -51,7 +51,7 @@ const Profile = () => {
       </div>
 
       {/* 프로필 정보 & 자기소개 */}
-      <div className={styles.profileContent}>
+      <div className={styles.profile__content}>
         <ProfileInfo user={user} onEdit={() => console.log("프로필 수정 기능 추가 예정")} />
         <ProfileIntroduction intro={user.intro} onSave={updateIntro} />
       </div>
