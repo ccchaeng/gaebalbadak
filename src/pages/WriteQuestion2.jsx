@@ -4,7 +4,7 @@ import Banner from "../components/common/Banner";
 import QuestionContainer from "../components/common/QuestionContainer";
 import styles from "./WriteQuestion.module.scss";
 
-function WriteQuestion() {
+function WriteQuestion2() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
@@ -23,8 +23,8 @@ function WriteQuestion() {
         <div className={styles.bannerWrapper}>
           <Banner 
             image={bannerImage} 
-            title="질문할래?" 
-            description="궁금한 게 무엇이든 질문해보세요." 
+            title="같이할래?" 
+            description="저희 프로젝트에 함께 참여해보시는 건 어떨까요?"
             className={styles.customBanner}
           />
         </div>
@@ -35,13 +35,13 @@ function WriteQuestion() {
         title={title} 
         setTitle={setTitle}
         content={content} 
-        setContent={setContent} 
+        setContent={setContent}
         onSubmit={handleSubmit} 
         onCancel={handleCancel}
-        Label = "언어 선택"
+        Label = "모집 분야"
       />
     </div>
   );
 }
 
-export default WriteQuestion;
+export default WriteQuestion2;

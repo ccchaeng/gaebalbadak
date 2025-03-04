@@ -27,7 +27,7 @@ const Box = () => {
 
   // ✅ 글쓰기 버튼 클릭 시 /write 페이지로 이동
   const handleWriteClick = () => {
-    navigate("/write");
+    navigate("/write2");
   };
 
   return (

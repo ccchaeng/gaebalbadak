@@ -7,7 +7,8 @@ const QuestionContainer = ({
   content, 
   setContent, 
   onSubmit, 
-  onCancel 
+  onCancel,
+  Label = ""
 }) => {
   return (
     <div className={styles.container}>
@@ -22,7 +23,7 @@ const QuestionContainer = ({
         />
 
         <div className={styles.extraBox}>
-          언어 선택 <span>▼</span>
+          {Label} <span>▼</span>
         </div>
       </div>
 
