@@ -8,13 +8,14 @@
   border-radius: 50%;
 
   overflow: hidden; // 이미지를 컨테이너 크기에 맞춤
-  border: 2px solid #ddd; // 원형 테두리 추가
-}
 
-.profileImage {
-  width: 100%; // 부모 요소에 꽉 차도록 설정
-  height: 100%;
-  
-  object-fit: cover; // 이미지 비율 유지하면서 크기 맞춤
-  border-radius: 50%; // 원형 유지
+
+  .profileImage {
+    width: 100%; // 부모 요소에 꽉 차도록 설정
+    height: 100%;
+
+    object-fit: cover; // 이미지 비율 유지하면서 크기 맞춤
+    border-radius: 50%; // 원형 유지
+  }
+
 }
