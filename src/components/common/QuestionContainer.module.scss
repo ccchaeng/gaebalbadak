@@ -2,25 +2,25 @@
 .container {
     width: 100%;
     max-width: 1300px;
-    min-height: 500px; /* ✅ 세로 길이 늘림 */
+    min-height: 500px;
     padding: 30px;
     margin: 20px auto;
     background: white;
     border-radius: 20px;
-    border: 1px solid #909090; /* ✅ 연한 회색 테두리 */
+    border: 1px solid #909090;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
     gap: 20px;
-    position: relative; /* ✅ 버튼 위치 조정을 위해 추가 */
+    position: relative;
 }
 
-/* ✅ 제목 + 언어 선택 줄 */
+/* ✅ 제목 + 모집 분야 선택 */
 .titleRow {
     display: flex;
     gap: 10px;
     align-items: center;
-    width: 70%; /* ✅ 전체 너비 사용 */
+    width: 70%;
 }
 
 /* ✅ 제목 입력 필드 */
@@ -31,13 +31,13 @@
     font-size: 16px;
     font-weight: 700;
     color: #6D6D6D;
-    border: 1px solid #000000; /* ✅ 검은색 테두리 */
+    border: 1px solid #000000;
     border-radius: 20px;
     background: #f9f9f9;
     box-sizing: border-box;
 }
 
-/* ✅ 언어 선택 드롭다운 */
+/* ✅ 모집 분야 드롭다운 */
 .extraBox {
     position: relative;
     flex: 0.4;
@@ -55,11 +55,12 @@
     justify-content: space-between;
     box-sizing: border-box;
 }
+
 .dropdownContent {
     position: absolute;
-    top: 40px; /* 🔥 extraBox 아래로 배치 */
-    left: 0; /* ✅ 왼쪽 정렬 */
-    width: 100%; /* ✅ 부모 크기에 맞춤 */
+    top: 50px; /* ✅ 드롭다운이 아래로 자연스럽게 나오도록 조정 */
+    left: 0;
+    width: 100%;
     max-height: 150px;
     overflow-y: auto;
     background-color: white;
@@ -67,17 +68,18 @@
     border-radius: 4px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     z-index: 100;
-  }
-  
-  .dropdownItem {
+}
+
+.dropdownItem {
     padding: 10px;
     cursor: pointer;
     transition: background 0.2s;
-  }
-  
-  .dropdownItem:hover {
+}
+
+.dropdownItem:hover {
     background: #f0f0f0;
-  }
+}
+
 /* ✅ 본문 입력 필드 */
 .textArea {
     width: 100%;
@@ -93,44 +95,82 @@
     box-sizing: border-box;
 }
 
-/* ✅ 이미지 업로드 섹션 */
-.imageUpload {
-    display: flex;
-    gap: 15px;
-    align-items: center;
-    margin-top: 5px;
-}
-
-.imageEx {
-    font-size: 16px;
-    font-weight: 700;
-    color: #6D6D6D;
-    margin-left: 5px; /* ✅ 왼쪽으로 더 붙임 */
-    margin-bottom: -5px; /* ✅ 아래쪽 간격 줄임 */
-}
-
-/* ✅ 이미지 박스 */
-.imageBox {
-    width: 130px; /* ✅ 크기 조정 */
-    height: 130px;
+/* ✅ 이미지 업로드 버튼 */
+.uploadButton {
+    width: 120px; /* 🔥 버튼 크기 조정 */
+    padding: 8px 10px;
+    font-size: 14px;
     border: 1px solid #000000;
-    border-radius: 20px;
+    border-radius: 10px;
+    background-color: #dddddd;
+    cursor: pointer;
+    transition: background 0.3s;
+    text-align: center;
+}
+
+.uploadButton:hover {
+    background-color: #bbbbbb;
+}
+
+/* ✅ 이미지 미리보기 컨테이너 (가로 정렬) */
+.imagePreviewContainer {
+    display: flex;
+    flex-wrap: nowrap; /* 🔥 이미지를 가로로 나열 */
+    gap: 10px;
+    margin-top: 10px;
+    overflow-x: auto; /* 🔥 이미지가 많아지면 가로 스크롤 가능 */
+    padding-bottom: 5px;
+}
+
+/* ✅ 개별 이미지 박스 */
+.imageBox {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    border: 1px solid #000;
+    border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
+    overflow: hidden;
 }
+
+/* ✅ 이미지 미리보기 */
+.previewImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ✅ 삭제 버튼 */
+.deleteButton {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: #bbbbbb;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 
 /* ✅ 버튼 스타일 */
 .buttonRow {
     display: flex;
     justify-content: flex-end;
     gap: 10px;
-    margin-top: 10px; /* ✅ 버튼 위쪽 간격 */
+    margin-top: 10px;
 }
 
 .button {
-    padding: 5px 15px; /* ✅ 크기 줄임 */
+    padding: 5px 15px;
     font-size: 14px;
     border: none;
     border-radius: 10px;

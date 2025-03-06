@@ -4,6 +4,7 @@ import { collection, getDocs } from "firebase/firestore";
 import bannerImage from "../assets/banner3.jpg";
 import Banner from "../components/common/Banner";
 import QuestionContainer from "../components/common/QuestionContainer";
+import { savePost } from "../usePost"; // 🔥 수정된 저장 함수 가져오기
 import styles from "./WriteQuestion.module.scss";
 
 function WriteQuestion2() {
@@ -12,7 +13,6 @@ function WriteQuestion2() {
   const [category, setCategory] = useState(""); // 선택한 모집 분야 저장
   const [categories, setCategories] = useState([]); // 모집 분야 목록
 
-  // Firestore에서 모집 분야 데이터 가져오기
   useEffect(() => {
     const fetchCategories = async () => {
       try {
@@ -23,21 +23,23 @@ function WriteQuestion2() {
         }));
         setCategories(categoryList);
       } catch (error) {
-        console.error("모집 분야 불러오기 실패:", error);
+        console.error("❌ 모집 분야 불러오기 실패:", error);
       }
     };
 
     fetchCategories();
   }, []);
 
-  const handleSubmit = () => {
-    console.log("글쓰기 버튼 클릭:", title, content, category);
+  // 📌 글쓰기 버튼 클릭 시 Firestore에 저장
+  const handleSubmit = (images) => {
+    console.log("🔥 글쓰기 버튼 클릭! 데이터 저장 시작...");
+    savePost(title, content, category, images); // ✅ Base64 이미지 포함
   };
 
   const handleCancel = () => {
     setTitle("");
     setContent("");
-    setCategory(""); // 모집 분야 초기화
+    setCategory("");
   };
 
   return (
@@ -53,18 +55,17 @@ function WriteQuestion2() {
         </div>
       </div>
 
-      {/* ✅ Firestore에서 불러온 `categories`를 `QuestionContainer`로 전달 */}
+      {/* ✅ Firestore에서 불러온 categories를 QuestionContainer로 전달 */}
       <QuestionContainer 
         title={title} 
         setTitle={setTitle}
         content={content} 
         setContent={setContent}
-        selectedCategory={category} // ✅ 선택한 모집 분야 전달
-        setSelectedCategory={setCategory} // ✅ 선택 변경 함수 전달
-        categories={categories} // ✅ Firestore 데이터 전달
+        selectedCategory={category} 
+        setSelectedCategory={setCategory} 
+        categories={categories} 
         onSubmit={handleSubmit} 
         onCancel={handleCancel}
-        Label="모집 분야" // ✅ 기존 UI 유지
       />
     </div>
   );
