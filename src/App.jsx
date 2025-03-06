@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Layout from './components/layout/Layout_TEMP';
 import Home from './pages/home/Home_TEMP';
 import Question from './pages/Question';
+import QuestionDetail from "./pages/QuestionDetail"
 import Collaboration from './pages/Collaboration';
 import Apply from './pages/Apply';
 import Login from './pages/Login';
@@ -20,6 +21,7 @@ function App() {
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
           <Route path="/question" element={<Question />} />
+          <Route path="/question_1" element={<QuestionDetail />} />
           <Route path="/collaboration" element={<Collaboration />} />
           <Route path="/apply" element={<Apply />} />
           <Route path="/profile" element={<Profile />} />
