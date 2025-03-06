@@ -5,36 +5,8 @@ import styles from "./Profile.module.scss";
 import bannerImage from "../assets/banner3.jpg";
 import Banner from "../components/common/Banner";
 import SearchBar from "../components/common/SearchBar";
-import ProfileInfo from '../components/common/ProfileInfo';
-import ProfileIntroduction from '../components/common/ProfileIntroduction';
-import ProfileProject from '../components/common/ProfileProject';
 
 const Profile = () => {
-  // 임시 사용자 정보
-  const [user, setUser] = useState({
-    photoURL: "/profile-example.png",
-    nickname: "KIMCHACHA",
-    email: "KIMCHACHA@naver.com",
-    passionScore: 243,
-    tier: "골드",
-    intro: "3D 게임 개발을 향해 나아가는 예비 개발자 🎮 Unity & 알고리즘 탐구",
-    projects: [
-      { image: "/project1.png", description: "Unity로 만든 아케이드 게임" },
-      { image: "/project2.png", description: "캘린더 앱" },
-    ],
-  });
-
-  // 자기소개 수정 핸들러
-  const updateIntro = (newIntro) => setUser({ ...user, intro: newIntro });
-
-  // 프로젝트 추가 핸들러 (임시 데이터)
-  const addProject = () => {
-    setUser({
-      ...user,
-      projects: [...user.projects, { image: "", description: "새로운 프로젝트" }],
-    });
-  };
-
   return (
     <div className={styles.profileContainer}>
       {/* 배너 (검색창 포함) */}
@@ -49,15 +21,6 @@ const Profile = () => {
           <SearchBar />
         </div>
       </div>
-
-      {/* 프로필 정보 & 자기소개 */}
-      <div className={styles.profile__content}>
-        <ProfileInfo user={user} onEdit={() => console.log("프로필 수정 기능 추가 예정")} />
-        <ProfileIntroduction intro={user.intro} onSave={updateIntro} />
-      </div>
-
-      {/* 프로젝트 리스트 */}
-      <ProfileProject projects={user.projects} onAddProject={addProject} />
     </div>
   );
 }
