@@ -21,7 +21,7 @@ function App() {
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
           <Route path="/question" element={<Question />} />
-          <Route path="/question_1" element={<QuestionDetail />} />
+          <Route path="/question/:postId" element={<QuestionDetail />} />
           <Route path="/collaboration" element={<Collaboration />} />
           <Route path="/apply" element={<Apply />} />
           <Route path="/profile" element={<Profile />} />

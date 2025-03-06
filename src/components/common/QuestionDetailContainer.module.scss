@@ -83,4 +83,20 @@
     cursor: pointer;
     white-space: nowrap;
   }
-  
+/* 🔥 이미지 컨테이너 */
+.imageContainer {
+  display: flex;
+  flex-wrap: wrap; /* ✅ 여러 개의 이미지가 있으면 줄 바꿈 */
+  gap: 10px; /* ✅ 이미지 간격 */
+  justify-content: flex-start; /* ✅ 왼쪽 정렬 */
+  margin-top: 20px;
+}
+
+/* 🔥 업로드된 이미지 */
+.uploadedImage {
+  max-width: 100%; /* ✅ 부모 컨테이너 크기에 맞추기 */
+  height: auto; /* ✅ 비율 유지 */
+  object-fit: cover; /* ✅ 비율을 유지하면서 박스 크기에 맞게 */
+  border-radius: 10px; /* ✅ 둥근 모서리 */
+  max-width: 600px; /* ✅ 최대 크기 설정 (너무 커지는 걸 방지) */
+}
