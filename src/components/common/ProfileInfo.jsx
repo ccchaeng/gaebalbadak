@@ -73,9 +73,9 @@ const ProfileInfo = ({ user }) => {
     
 
     return (
-        <div className={styles.profileContainer}>
+        <div className={styles.infoContainer}>
             {/* 사용자 프로필 이미지 */}
-            <ProfileImage photoURL={photo} nickname={nickname} className={styles.profileImage} />
+            <ProfileImage photoURL={photo} nickname={nickname} className={styles.image}/>
 
             {/* 수정 모드일 때만 이미지 파일 업로드 표시  */}
             {editing && <input type="file" accept="image/*" onChange={handleImageChange} />}
@@ -87,8 +87,12 @@ const ProfileInfo = ({ user }) => {
                 ) : (
                     <p>{nickname}</p>
                 )}
+
+                <div className={styles.line} />
                 <p>{user.email}</p>
+                <div className={styles.line} />
                 <p>열정 점수: {user.passionScore}</p>
+                <div className={styles.line} />
                 <p>티어 점수: {user.tier}</p>
             </div>
 
