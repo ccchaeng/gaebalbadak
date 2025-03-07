@@ -45,7 +45,7 @@ function NavBar({ className = "" }) {
                 <ProfileImage 
                   photoURL={profile.photoURL}
                   nickname={profile.nickname}
-                  className={styles.ProfileImage}
+                  className={styles.image}
                 />
               </Link>
             </div>
