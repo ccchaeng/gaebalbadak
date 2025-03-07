@@ -2,7 +2,6 @@ import React from "react";
 import bannerImage from "../assets/banner3.jpg";
 import Banner from "../components/common/Banner";
 import SearchBar from "../components/common/SearchBar";
-
 import styles from "./Apply.module.scss";
 
 function Apply() {

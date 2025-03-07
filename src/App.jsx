@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-import './App.css';
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Layout from './components/layout/Layout_TEMP';
 import Home from './pages/home/Home_TEMP';
@@ -12,7 +11,6 @@ import SignUp from './pages/SignUp';
 import Profile from './pages/Profile';
 import WriteQuestion from './pages/WriteQuestion';
 import WriteQuestion2 from './pages/WriteQuestion2';
-
 
 function App() {
   return (
