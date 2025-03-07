@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-import './App.css';
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Layout from './components/layout/Layout_TEMP';
 import Home from './pages/home/Home_TEMP';
@@ -12,6 +11,7 @@ import SignUp from './pages/SignUp';
 import Profile from './pages/Profile';
 import WriteQuestion from './pages/WriteQuestion';
 import WriteQuestion2 from './pages/WriteQuestion2';
+import WriteQuestion3 from './pages/WriteQuestion3';
 
 
 function App() {
@@ -29,6 +29,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/write" element={<WriteQuestion />} />
           <Route path="/write2" element={<WriteQuestion2 />} />
+          <Route path="/write3" element={<WriteQuestion3 />} />
         </Route>
 
         {/* Layout이 필요 없는 개별 페이지 */}

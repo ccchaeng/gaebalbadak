@@ -56,7 +56,7 @@ function WriteQuestion2() {
       </div>
 
       {/* ✅ Firestore에서 불러온 categories를 QuestionContainer로 전달 */}
-      <QuestionContainer 
+      <QuestionContainer
         title={title} 
         setTitle={setTitle}
         content={content} 
