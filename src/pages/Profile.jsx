@@ -39,8 +39,10 @@ const Profile = () => {
         </div>
       </div>
 
-      {/* 프로필 정보 */}
-      <ProfileInfo user={user} />
+      <div className={styles.infoContainer}>
+        {/* 프로필 정보 */}
+        <ProfileInfo user={user} />
+      </div>
     </div>
   );
 };

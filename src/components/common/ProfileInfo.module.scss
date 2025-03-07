@@ -1,72 +1,53 @@
-// ProfileInfo.module.scss
+.infoContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
 
-.profileContainer {
-    display: flex;
-    flex-direction: column; // 프로필 이미지와 정보를 가로로 배치
-    align-items: center;
-    justify-content: space-between;
-    width: 80%;
-    max-width: 900px;
-    background: #fff;
-    border-radius: 12px;
-    padding: 20px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    margin: 30px auto;
-  }
-  
-  .profileImage {
-    flex-shrink: 0;
-    width: 120px;
-    height: 120px;
+  width: 13%;
+
+  padding: 20px;
+  margin: 30px;
+
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
+  .image {
+    width: 130px;
+    height: 130px;
+
     border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid #ddd;
-  }
   
+    overflow: hidden;
+  }
+
   .profileDetails {
-    flex: 1; // 유연한 크기 조정
-    margin-left: 20px;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .profileDetails p {
-    margin: 5px 0;
-    font-size: 16px;
-    color: #333;
-  }
-  
-  .bioContainer {
     flex: 1;
-    background: #f9f9f9;
-    border-radius: 12px;
-    padding: 20px;
-    margin-left: 20px;
-    font-size: 16px;
-    line-height: 1.5;
-    color: #444;
-    min-height: 150px;
     display: flex;
+    align-items: center;
     flex-direction: column;
-    justify-content: center;
+
+    padding-top: 10px;
+    font-size: 18px;
   }
-  
-  // 수정 & 저장 버튼
+
   .editButton,
   .saveButton {
-    background: #4a90e2;
-    color: white;
-    border: none;
+    width: 30%;
     padding: 8px 16px;
+    margin-top: 20px;
+
+    background-color: #7FD1AE;
     border-radius: 6px;
+
     cursor: pointer;
-    transition: 0.3s;
+    transition: background-color 0.3s;
+
     font-size: 14px;
     font-weight: bold;
+
+    &:hover {
+      background-color: #6db696;
+    }
   }
-  
-  .editButton:hover,
-  .saveButton:hover {
-    background: #357ab7;
-  }
-  
+}
