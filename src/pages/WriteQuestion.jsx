@@ -1,45 +1,46 @@
 import React, { useEffect, useState } from "react";
-import { db } from "../firebase"; // Firebase 연결
+import { db } from "../firebase"; // ✅ Firestore 연결
 import { collection, getDocs } from "firebase/firestore";
 import bannerImage from "../assets/banner3.jpg";
 import Banner from "../components/common/Banner";
 import QuestionContainer from "../components/common/QuestionContainer";
-import { savePost } from "../usePost"; // 🔥 수정된 저장 함수 가져오기
+import { savePost } from "../usePost"; // ✅ Firestore 저장 함수
 import styles from "./WriteQuestion.module.scss";
 
 function WriteQuestion2() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [category, setCategory] = useState(""); // 선택한 모집 분야 저장
-  const [categories, setCategories] = useState([]); // 모집 분야 목록
+  const [selectedLanguage, setSelectedLanguage] = useState(""); // ✅ 선택한 언어
+  const [languages, setLanguages] = useState([]); // ✅ Firestore에서 불러온 언어 목록
 
+  // 🔥 Firestore에서 `languages` 컬렉션 불러오기
   useEffect(() => {
-    const fetchCategories = async () => {
+    const fetchLanguages = async () => {
       try {
-        const querySnapshot = await getDocs(collection(db, "categories"));
-        const categoryList = querySnapshot.docs.map(doc => ({
+        const querySnapshot = await getDocs(collection(db, "language")); // ✅ "language" 컬렉션에서 데이터 가져오기
+        const languageList = querySnapshot.docs.map(doc => ({
           id: doc.id,
           ...doc.data()
         }));
-        setCategories(categoryList);
+        setLanguages(languageList); // ✅ 가져온 데이터를 상태에 저장
       } catch (error) {
-        console.error("❌ 모집 분야 불러오기 실패:", error);
+        console.error("❌ 언어 목록 불러오기 실패:", error);
       }
     };
 
-    fetchCategories();
+    fetchLanguages();
   }, []);
 
   // 📌 글쓰기 버튼 클릭 시 Firestore에 저장
   const handleSubmit = (images) => {
     console.log("🔥 글쓰기 버튼 클릭! 데이터 저장 시작...");
-    savePost(title, content, category, images); // ✅ Base64 이미지 포함
+    savePost(title, content, selectedLanguage, images); // ✅ Base64 이미지 포함
   };
 
   const handleCancel = () => {
     setTitle("");
     setContent("");
-    setCategory("");
+    setSelectedLanguage(""); // ✅ 선택한 언어 초기화
   };
 
   return (
@@ -49,23 +50,24 @@ function WriteQuestion2() {
           <Banner 
             image={bannerImage} 
             title="질문할래?" 
-          description="궁금한 게 무엇이든 질문해보세요." 
+            description="궁금한 게 무엇이든 질문해보세요." 
             className={styles.customBanner}
           />
         </div>
       </div>
 
-      {/* ✅ Firestore에서 불러온 categories를 QuestionContainer로 전달 */}
+      {/* ✅ Firestore에서 불러온 `languages`를 QuestionContainer로 전달 */}
       <QuestionContainer 
         title={title} 
         setTitle={setTitle}
         content={content} 
         setContent={setContent}
-        selectedCategory={category} 
-        setSelectedCategory={setCategory} 
-        categories={categories} 
+        selectedCategory={selectedLanguage}  // ✅ 기존 category → language로 변경
+        setSelectedCategory={setSelectedLanguage} // ✅ 기존 setCategory → setSelectedLanguage 변경
+        categories={languages} // ✅ 기존 categories → languages로 변경
         onSubmit={handleSubmit} 
         onCancel={handleCancel}
+        categoryTitle="질문 분야" // ✅ 문구 전달
       />
     </div>
   );

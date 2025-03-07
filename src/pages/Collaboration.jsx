@@ -6,6 +6,9 @@ import styles from "./Collaboration.module.scss"; // 스타일 파일
 import Box from "../components/common/Box"; 
 
 const Collaboration = () => {
+  // ✅ 같이할래 게시판 전용 탭 목록
+  const collaborationTabs = ["전체", "Web", "App", "Unity", "Game Dev", "Blockchain","UnrealEngine", "기타"];
+
   return (
     <div className={styles.homeContainer}>
       {/* 🔥 배너 (검색창 오버레이 포함) */}
@@ -20,7 +23,8 @@ const Collaboration = () => {
           <SearchBar />
         </div>
       </div>
-      <Box></Box>
+      {/* 🔥 `Box` 컴포넌트에 `tabs` 전달 */}
+      <Box tabs={collaborationTabs} categoryTitle="모집분야" /> {/* ✅ 변경된 props 전달 */}
     </div>
   );
 };

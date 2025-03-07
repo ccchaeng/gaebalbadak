@@ -6,6 +6,7 @@ import styles from "./Collaboration.module.scss"; // 스타일 파일
 import Box from "../components/common/Box"; 
 
 function Question() {
+  const questionTabs = ["전체", "Java", "Python", "C", "C++","JavaScript","Kotlin", "PHP","TypeScript" ,"기타"];
   return (
     <div className={styles.homeContainer}>
       <div className={styles.bannerWrapper}>
@@ -19,7 +20,7 @@ function Question() {
           <SearchBar />
         </div>
       </div>
-      <Box></Box>
+      <Box tabs={questionTabs} categoryTitle="질문 분야" /> {/* ✅ 변경된 props 전달 */}
     </div>
   );
 }
