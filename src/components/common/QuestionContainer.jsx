@@ -1,20 +1,21 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"; // ✅ 페이지 이동 훅
+import { savePost } from "../../usePost"; // ✅ Firestore 저장 함수 가져오기
 import styles from "./QuestionContainer.module.scss";
 
 const QuestionContainer = ({ 
   title, setTitle, 
   content, setContent, 
   selectedCategory, setSelectedCategory, 
-  categories, onSubmit, onCancel 
+  categories, onCancel 
 }) => {
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false); // ✅ 드롭다운 상태 추가
+  const navigate = useNavigate(); // ✅ 페이지 이동을 위한 훅
   const [images, setImages] = useState([]); // 🔥 업로드된 이미지 상태
 
-  // ✅ 이미지 업로드 핸들러
+  // ✅ 이미지 업로드 핸들러 (Base64 변환)
   const handleImageUpload = (event) => {
     const files = Array.from(event.target.files);
-
-    // 🔹 파일을 Base64로 변환
     const toBase64 = (file) => new Promise((resolve, reject) => {
       const reader = new FileReader();
       reader.readAsDataURL(file);
@@ -23,7 +24,7 @@ const QuestionContainer = ({
     });
 
     Promise.all(files.map(toBase64)).then((base64Images) => {
-      setImages((prevImages) => [...prevImages, ...base64Images]); // 🔹 기존 이미지 + 새 이미지 추가
+      setImages((prevImages) => [...prevImages, ...base64Images]);
     });
   };
 
@@ -32,9 +33,18 @@ const QuestionContainer = ({
     setImages((prevImages) => prevImages.filter((_, i) => i !== index));
   };
 
+  // ✅ 글쓰기 버튼 클릭 시 실행
+  const handleSubmit = async () => {
+    const postId = await savePost(title, content, selectedCategory, images); // ✅ Firestore 저장
+
+    if (postId) {
+      navigate(`/question/${postId}`); // ✅ 저장 후 해당 게시글 상세 페이지로 이동
+    }
+  };
+
   return (
     <div className={styles.container}>
-      {/* 제목 + 모집 분야 선택 */}
+      {/* 🔥 제목 + 모집 분야 선택 */}
       <div className={styles.titleRow}>
         <input
           type="text"
@@ -65,7 +75,7 @@ const QuestionContainer = ({
         </div>
       </div>
 
-      {/* 본문 입력 */}
+      {/* 🔥 본문 입력 */}
       <textarea
         className={styles.textArea}
         placeholder="내용"
@@ -73,9 +83,7 @@ const QuestionContainer = ({
         onChange={(e) => setContent(e.target.value)}
       />
 
-      <div className={styles.imageEx}>이미지 첨부</div>
-
-      {/* ✅ 이미지 업로드 버튼 */}
+      {/* 🔥 이미지 업로드 */}
       <input 
         id="imageUploadInput" 
         type="file" 
@@ -88,7 +96,7 @@ const QuestionContainer = ({
         📷 이미지 선택
       </button>
 
-      {/* ✅ 이미지 미리보기 + 삭제 기능 (가로 정렬) */}
+      {/* 🔥 이미지 미리보기 + 삭제 기능 */}
       <div className={styles.imagePreviewContainer}>
         {images.map((image, index) => (
           <div key={index} className={styles.imageBox}>
@@ -98,9 +106,9 @@ const QuestionContainer = ({
         ))}
       </div>
 
-      {/* 버튼 */}
+      {/* 🔥 버튼 */}
       <div className={styles.buttonRow}>
-        <button className={`${styles.button} ${styles.submitButton}`} onClick={() => onSubmit(images)}>글쓰기</button>
+        <button className={`${styles.button} ${styles.submitButton}`} onClick={handleSubmit}>글쓰기</button>
         <button className={`${styles.button} ${styles.cancelButton}`} onClick={onCancel}>삭제</button>
       </div>
     </div>
