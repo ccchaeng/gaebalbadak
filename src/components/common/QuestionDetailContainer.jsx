@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { getDoc, doc } from "firebase/firestore";
 import { db } from "../../firebase"; // ✅ Firestore 연결
 import styles from "./QuestionDetailContainer.module.scss";
@@ -7,6 +7,7 @@ import styles from "./QuestionDetailContainer.module.scss";
 function QuestionDetailContainer() {
   const { postId } = useParams(); // ✅ URL에서 postId 가져오기
   const navigate = useNavigate();
+  const location = useLocation();
   const [post, setPost] = useState(null); // ✅ 게시글 데이터 상태
 
   // 🔥 Firestore에서 특정 postId의 게시글 데이터 가져오기
@@ -14,7 +15,12 @@ function QuestionDetailContainer() {
     const fetchPost = async () => {
       if (!postId) return;
       try {
-        const docRef = doc(db, "posts", postId);
+        // ✅ 게시판 종류에 따라 Firestore 컬렉션 변경
+        const boardType = location.pathname.startsWith("/collaboration") 
+          ? "posts_collaboration" 
+          : "posts_question";
+
+        const docRef = doc(db, boardType, postId);
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
@@ -28,12 +34,12 @@ function QuestionDetailContainer() {
     };
 
     fetchPost();
-  }, [postId]);
+  }, [postId, location.pathname]);
 
   // ✅ post가 null이면 "로딩 중..."을 먼저 표시
-if (!post) {
-  return <div className={styles.loading}>게시글을 불러오는 중...</div>;
-}
+  if (!post) {
+    return <div className={styles.loading}>게시글을 불러오는 중...</div>;
+  }
 
   return (
     <div className={styles.container}>

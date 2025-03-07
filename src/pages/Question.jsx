@@ -2,7 +2,8 @@ import React from "react";
 import bannerImage from "../assets/banner3.jpg";
 import Banner from "../components/common/Banner";
 import SearchBar from "../components/common/SearchBar";
-import styles from "./Question.module.scss";
+import styles from "./Collaboration.module.scss"; // 스타일 파일
+import Box from "../components/common/Box"; 
 
 function Question() {
   return (
@@ -18,6 +19,7 @@ function Question() {
           <SearchBar />
         </div>
       </div>
+      <Box></Box>
     </div>
   );
 }
