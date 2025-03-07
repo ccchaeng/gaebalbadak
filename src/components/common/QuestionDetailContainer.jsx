@@ -1,23 +1,26 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { getDoc, doc } from "firebase/firestore";
 import { db } from "../../firebase"; // ✅ Firestore 연결
-import { addComment, listenToComments } from "../../hooks/useComments";
 import styles from "./QuestionDetailContainer.module.scss";
 
 function QuestionDetailContainer() {
   const { postId } = useParams(); // ✅ URL에서 postId 가져오기
   const navigate = useNavigate();
+  const location = useLocation();
   const [post, setPost] = useState(null); // ✅ 게시글 데이터 상태
-  const [comments, setComments] = useState([]); // ✅ 댓글 상태 추가
-  const [newComment, setNewComment] = useState(""); // ✅ 입력된 댓글 상태
 
   // 🔥 Firestore에서 특정 postId의 게시글 데이터 가져오기
   useEffect(() => {
     const fetchPost = async () => {
       if (!postId) return;
       try {
-        const docRef = doc(db, "posts", postId);
+        // ✅ 게시판 종류에 따라 Firestore 컬렉션 변경
+        const boardType = location.pathname.startsWith("/collaboration") 
+          ? "posts_collaboration" 
+          : "posts_question";
+
+        const docRef = doc(db, boardType, postId);
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
@@ -31,28 +34,12 @@ function QuestionDetailContainer() {
     };
 
     fetchPost();
-  }, [postId]);
-
-    // ✅ Firestore에서 댓글 실시간 가져오기
-    useEffect(() => {
-      if (!postId) return;
-  
-      const unsubscribe = listenToComments(postId, setComments);
-      return () => unsubscribe(); // ✅ 언마운트 시 구독 해제
-    }, [postId]);
-  
-    // ✅ 댓글 추가 함수
-    const handleAddComment = async () => {
-      if (!newComment.trim()) return; // 빈 댓글 방지
-  
-      await addComment(postId, newComment, "사용자"); // 사용자 이름 (임시)
-      setNewComment(""); // 입력창 비우기
-    };
+  }, [postId, location.pathname]);
 
   // ✅ post가 null이면 "로딩 중..."을 먼저 표시
-if (!post) {
-  return <div className={styles.loading}>게시글을 불러오는 중...</div>;
-}
+  if (!post) {
+    return <div className={styles.loading}>게시글을 불러오는 중...</div>;
+  }
 
   return (
     <div className={styles.container}>
@@ -79,32 +66,12 @@ if (!post) {
         )}
       </div>
 
-      <div className={styles.commentsContainer}>
-  {comments.map((comment) => (
-    <div key={comment.id} className={styles.commentBox}>  {/* ✅ 박스 추가 */}
-      <p className={styles.commentNickname}>{comment.nickname || "익명"}</p>  {/* ✅ 닉네임 스타일 적용 */}
-      <p>{comment.content}</p>
-      <span className={styles.commentDate}>
-        {comment.createdAt?.seconds 
-          ? new Date(comment.createdAt.seconds * 1000).toLocaleString() 
-          : "방금 전"}
-      </span>
-    </div>
-  ))}
-</div>
-
-
-
-      {/* 🔥 댓글 입력 박스 */}
+      {/* 🔥 댓글 입력 박스 (추후 기능 추가 가능) */}
       <div className={styles.inputBox}>
-        <textarea 
-          placeholder="댓글을 입력하세요..." 
-          value={newComment} 
-          onChange={(e) => setNewComment(e.target.value)} 
-        />
-        <button onClick={handleAddComment}>확인</button>
+        <textarea placeholder="댓글을 입력하세요..." />
+        <button>확인</button>
       </div>
-      </div>
+    </div>
   );
 }
 

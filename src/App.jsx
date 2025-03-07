@@ -23,6 +23,7 @@ function App() {
           <Route path="/question" element={<Question />} />
           <Route path="/question/:postId" element={<QuestionDetail />} />
           <Route path="/collaboration" element={<Collaboration />} />
+          <Route path="/collaboration/:postId" element={<QuestionDetail />} />  {/* ✅ 추가 */}
           <Route path="/apply" element={<Apply />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/write" element={<WriteQuestion />} />

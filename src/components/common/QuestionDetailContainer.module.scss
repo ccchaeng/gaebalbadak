@@ -1,126 +1,102 @@
 .container {
-  max-width: 1300px;
-  width: 100%; 
-  margin: 0 auto;
-  padding: 30px;
-  padding-bottom: 50px;
-  margin-bottom: 45px; /* ✅ 푸터와 간격 확보 */
-  flex: 1;
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 1300px;
+    width: 100%; 
+    margin: 0 auto;
+    padding: 30px;
+    padding-bottom: 50px;
+    margin-bottom: 45px; /* ✅ 푸터와 간격 확보 */
+    flex: 1;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
-
-/* 🔥 상단 제목 & 뒤로 가기 버튼 */
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 3px 15px;
-  background: #f9f9f9;
-  border-radius: 10px;
-}
-
-.backButton {
-  background: none;
-  border: none;
-  font-size: 18px;
-  cursor: pointer;
-}
-
-.title {
-  font-size: 18px;
-  font-weight: bold;
-  flex-grow: 1;
-  text-align: left;
-  padding: 0 10px;
-}
-
-.authorInfo {
-  font-size: 14px;
-  color: #666;
-}
-
-/* 🔥 콘텐츠 영역 */
-.content {
-  margin-top: 20px;
-  min-height: 200px;
-  background: #fafafa;
-  border-radius: 10px;
-  padding: 20px;
-}
-
-/* 🔥 입력 박스 */
-.inputBox {
-  margin-top: 20px;
-  padding: 15px;
-  background: #f9f9f9;
-  border-radius: 8px;
-  display: flex;
-  flex-direction: column;
-}
-
-.inputBox textarea {
-  width: 98%; /* ✅ 입력창이 부모 너비를 꽉 차도록 */
-  height: 80px;
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  resize: none;
-  margin-bottom: 10px; /* ✅ 버튼과 간격 추가 */
-}
-
-/* ✅ 버튼을 오른쪽 아래에 배치 */
-.inputBox button {
-  align-self: flex-end; /* ✅ 오른쪽 정렬 */
-  background: #BBBBBB;
-  color: BLACK;
-  padding: 5px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  white-space: nowrap;
-}
+  
+  /* 🔥 상단 제목 & 뒤로 가기 버튼 */
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 3px 15px;
+    background: #f9f9f9;
+    border-radius: 10px;
+  }
+  
+  .backButton {
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+  }
+  
+  .title {
+    font-size: 18px;
+    font-weight: bold;
+    flex-grow: 1;
+    text-align: left;
+    padding: 0 10px;
+  }
+  
+  .authorInfo {
+    font-size: 14px;
+    color: #666;
+  }
+  
+  /* 🔥 콘텐츠 영역 */
+  .content {
+    margin-top: 20px;
+    min-height: 200px;
+    background: #fafafa;
+    border-radius: 10px;
+    padding: 20px;
+  }
+  
+  /* 🔥 입력 박스 */
+  .inputBox {
+    margin-top: 20px;
+    padding: 15px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  
+  
+  .inputBox textarea {
+    width: 98%; /* ✅ 입력창이 부모 너비를 꽉 차도록 */
+    height: 80px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    resize: none;
+    margin-bottom: 10px; /* ✅ 버튼과 간격 추가 */
+  }
+  
+  /* ✅ 버튼을 오른쪽 아래에 배치 */
+  .inputBox button {
+    align-self: flex-end; /* ✅ 오른쪽 정렬 */
+    background: #BBBBBB;
+    color: BLACK;
+    padding: 5px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    white-space: nowrap;
+  }
 /* 🔥 이미지 컨테이너 */
 .imageContainer {
-display: flex;
-flex-wrap: wrap; /* ✅ 여러 개의 이미지가 있으면 줄 바꿈 */
-gap: 10px; /* ✅ 이미지 간격 */
-justify-content: flex-start; /* ✅ 왼쪽 정렬 */
-margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap; /* ✅ 여러 개의 이미지가 있으면 줄 바꿈 */
+  gap: 10px; /* ✅ 이미지 간격 */
+  justify-content: flex-start; /* ✅ 왼쪽 정렬 */
+  margin-top: 20px;
 }
 
 /* 🔥 업로드된 이미지 */
 .uploadedImage {
-max-width: 100%; /* ✅ 부모 컨테이너 크기에 맞추기 */
-height: auto; /* ✅ 비율 유지 */
-object-fit: cover; /* ✅ 비율을 유지하면서 박스 크기에 맞게 */
-border-radius: 10px; /* ✅ 둥근 모서리 */
-max-width: 600px; /* ✅ 최대 크기 설정 (너무 커지는 걸 방지) */
-}
-
-.commentBox {
-  margin-top: 10px;
-  padding: 15px;
-  background: #f9f9f9;
-  border-radius: 8px;
-  display: flex;
-  flex-direction: column;
-  position: relative; /* ✅ 위치 조정을 위해 추가 */
-}
-
-.commentNickname {
-  font-weight: bold;
-  color: #333;
-  padding-bottom: 5px;
-  border-bottom: 1px solid #ddd;
-  margin-top: -5px; /* ✅ 닉네임을 더 위로 올리기 */
-  align-self: flex-start; /* ✅ 왼쪽 정렬 */
-  margin-left: 10px; /* ✅ 오른쪽으로 이동 */
-}
-.commentDate {
-  font-size: 12px;
-  color: #777;
-  align-self: flex-end; /* ✅ 날짜를 오른쪽 정렬 */
-  margin-top: -15px; /* ✅ 날짜 위치 조정 */
+  max-width: 100%; /* ✅ 부모 컨테이너 크기에 맞추기 */
+  height: auto; /* ✅ 비율 유지 */
+  object-fit: cover; /* ✅ 비율을 유지하면서 박스 크기에 맞게 */
+  border-radius: 10px; /* ✅ 둥근 모서리 */
+  max-width: 600px; /* ✅ 최대 크기 설정 (너무 커지는 걸 방지) */
 }

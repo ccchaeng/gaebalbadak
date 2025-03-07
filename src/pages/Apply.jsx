@@ -3,6 +3,7 @@ import bannerImage from "../assets/banner3.jpg";
 import Banner from "../components/common/Banner";
 import SearchBar from "../components/common/SearchBar";
 import styles from "./Apply.module.scss";
+import Box from "../components/common/Box"; 
 
 function Apply() {
   return (
@@ -19,6 +20,7 @@ function Apply() {
           <SearchBar />
         </div>
       </div>
+      <Box></Box>
     </div>
   );
 }

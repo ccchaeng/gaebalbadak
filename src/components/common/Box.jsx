@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // ✅ useNavigate 추가
+import { useNavigate, useLocation } from "react-router-dom"; // ✅ useLocation 추가
 import styles from "./Box.module.scss";
+
 
 const tabs = ["전체", "Web", "App", "Unity", "Unreal Engine", "JavaScript", "Kotlin", "PHP", "TypeScript", "기타"];
 
@@ -12,7 +13,6 @@ const posts = [
   { title: "PHP 개발팀 구성", lang: "PHP", author: "David", comments: 4, likes: 12, level: "🔥🔥", date: "2024-02-25", category: "PHP" },
   { title: "TypeScript 프로젝트", lang: "TypeScript", author: "Eve", comments: 2, likes: 7, level: "🔥", date: "2024-02-24", category: "TypeScript" }
 ];
-
 const Box = () => {
   const navigate = useNavigate(); // ✅ useNavigate 훅 사용
   const [activeTab, setActiveTab] = useState("전체");
@@ -25,11 +25,15 @@ const Box = () => {
   const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
   const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
 
-  // ✅ 글쓰기 버튼 클릭 시 /write 페이지로 이동
-  const handleWriteClick = () => {
-    navigate("/write2");
-  };
-
+// ✅ 글쓰기 버튼 클릭 시, 현재 경로에 따라 이동할 페이지 변경
+const handleWriteClick = () => {
+  if (location.pathname.startsWith("/question")) {
+    navigate("/write"); // 📌 질문할래 → /write 이동
+  } else if (location.pathname.startsWith("/collaboration")) {
+    navigate("/write2"); // 📌 같이할래 → /write2 이동
+  }
+};
+const location = useLocation(); // ✅ 현재 URL 정보 가져오기
   return (
     <div className={styles.outerBox}>
       {/* 🔹 모집 분야 & 탭 버튼 리스트 */}
