@@ -14,7 +14,7 @@ const ProfileInfo = ({ user }) => {
     const [nickname, setNickname] = useState(user.nickname); // 닉네임 상태 관리
     const [photo, setPhoto] = useState(user.photoURL); // 프로필 상태 관리
 
-    // 이미지 파일 Base64로 변환 후 Firestore 저장
+    // 이미지 파일 Base64로 변환하여 Firestore 저장
     const handleImageChange = (e) => {
         if (!e.target.files || e.target.files.length === 0) {
             console.error("파일이 선택되지 않았습니다.");
