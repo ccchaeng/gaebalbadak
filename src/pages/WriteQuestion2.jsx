@@ -66,6 +66,7 @@ function WriteQuestion2() {
         categories={categories} 
         onSubmit={handleSubmit} 
         onCancel={handleCancel}
+        categoryTitle="모집 분야" // ✅ 문구 전달
       />
     </div>
   );

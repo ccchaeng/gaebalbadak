@@ -1,45 +1,69 @@
-import React, { useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom"; // ✅ useLocation 추가
+import React, { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../../firebase";
 import styles from "./Box.module.scss";
 
-
-const tabs = ["전체", "Web", "App", "Unity", "Unreal Engine", "JavaScript", "Kotlin", "PHP", "TypeScript", "기타"];
-
-// 더미 데이터
-const posts = [
-  { title: "React 프로젝트 모집", lang: "JavaScript", author: "Alice", comments: 3, likes: 10, level: "🔥🔥", date: "2024-02-28", category: "Web" },
-  { title: "Kotlin 개발자 구함", lang: "Kotlin", author: "Bob", comments: 1, likes: 5, level: "🔥", date: "2024-02-27", category: "Kotlin" },
-  { title: "유니티 개발자 모집", lang: "C#", author: "Charlie", comments: 2, likes: 8, level: "🔥🔥🔥", date: "2024-02-26", category: "Unity" },
-  { title: "PHP 개발팀 구성", lang: "PHP", author: "David", comments: 4, likes: 12, level: "🔥🔥", date: "2024-02-25", category: "PHP" },
-  { title: "TypeScript 프로젝트", lang: "TypeScript", author: "Eve", comments: 2, likes: 7, level: "🔥", date: "2024-02-24", category: "TypeScript" }
-];
-const Box = () => {
-  const navigate = useNavigate(); // ✅ useNavigate 훅 사용
+const Box = ({ tabs, categoryTitle }) => { // ✅ `categoryTitle` 추가
+  const navigate = useNavigate();
+  const location = useLocation();
   const [activeTab, setActiveTab] = useState("전체");
   const [currentPage, setCurrentPage] = useState(1);
+  const [posts, setPosts] = useState([]);
 
-  const postsPerPage = 3; // 한 페이지에 보여줄 게시글 수
+  const postsPerPage = 3;
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      const collectionName = location.pathname.startsWith("/question") 
+        ? "posts_question" 
+        : "posts_collaboration"; 
+
+      try {
+        const querySnapshot = await getDocs(collection(db, collectionName));
+        const postData = querySnapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        }));
+        setPosts(postData);
+      } catch (error) {
+        console.error("❌ Firestore 데이터 불러오기 실패:", error);
+      }
+    };
+
+    fetchPosts();
+  }, [location.pathname]);
+
   const filteredPosts = activeTab === "전체" ? posts : posts.filter(post => post.category === activeTab);
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
   const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
 
-// ✅ 글쓰기 버튼 클릭 시, 현재 경로에 따라 이동할 페이지 변경
-const handleWriteClick = () => {
-  if (location.pathname.startsWith("/question")) {
-    navigate("/write"); // 📌 질문할래 → /write 이동
-  } else if (location.pathname.startsWith("/collaboration")) {
-    navigate("/write2"); // 📌 같이할래 → /write2 이동
-  }
-};
-const location = useLocation(); // ✅ 현재 URL 정보 가져오기
+  const handlePostClick = (postId) => {
+    const detailPath = location.pathname.startsWith("/question") 
+      ? `/question/${postId}` 
+      : `/collaboration/${postId}`;
+    navigate(detailPath);
+  };
+
+  const handleWriteClick = () => {
+    if (location.pathname.startsWith("/question")) {
+      navigate("/write");
+    } else if (location.pathname.startsWith("/collaboration")) {
+      navigate("/write2");
+    }
+  };
+
   return (
     <div className={styles.outerBox}>
-      {/* 🔹 모집 분야 & 탭 버튼 리스트 */}
       <div className={styles.innerBox1}>
-        <span className={styles.category} onClick={() => { setActiveTab("전체"); setCurrentPage(1); }} style={{ cursor: "pointer" }}>
-          모집분야
+        <span 
+          className={styles.category} 
+          onClick={() => { setActiveTab("전체"); setCurrentPage(1); }} 
+          style={{ cursor: "pointer" }}
+        >
+          {categoryTitle} {/* ✅ 전달받은 "모집분야" 문구를 표시 */}
         </span>
         <div className={styles.tabContainer}>
           {tabs.map((tab) => (
@@ -48,7 +72,7 @@ const location = useLocation(); // ✅ 현재 URL 정보 가져오기
               className={`${styles.tabButton} ${activeTab === tab ? styles.active : ""}`}
               onClick={() => {
                 setActiveTab(tab);
-                setCurrentPage(1); // 탭 변경 시 페이지 초기화
+                setCurrentPage(1);
               }}
             >
               {tab}
@@ -57,7 +81,6 @@ const location = useLocation(); // ✅ 현재 URL 정보 가져오기
         </div>
       </div>
 
-      {/* 🔹 데이터 테이블 */}
       <div className={styles.innerBox2}>
         <table className={styles.table}>
           <thead>
@@ -73,15 +96,15 @@ const location = useLocation(); // ✅ 현재 URL 정보 가져오기
           </thead>
           <tbody>
             {currentPosts.length > 0 ? (
-              currentPosts.map((post, index) => (
-                <tr key={index}>
-                  <td>{post.title}</td>
-                  <td>{post.lang}</td>
-                  <td>{post.author}</td>
-                  <td>{post.comments}</td>
-                  <td>{post.likes}</td>
-                  <td>{post.level}</td>
-                  <td>{post.date}</td>
+              currentPosts.map((post) => (
+                <tr key={post.id} onClick={() => handlePostClick(post.id)} style={{ cursor: "pointer" }}>
+                  <td>{post.title || "-"}</td>
+                  <td>{post.language || "-"}</td>  
+                  <td>{post.author || "-"}</td>
+                  <td>{post.comments !== undefined ? post.comments : "-"}</td>
+                  <td>{post.likes !== undefined ? post.likes : "-"}</td>
+                  <td>{post.level || "-"}</td>
+                  <td>{post.createdAt ? new Date(post.createdAt.seconds * 1000).toLocaleDateString() : "-"}</td>
                 </tr>
               ))
             ) : (
@@ -93,7 +116,6 @@ const location = useLocation(); // ✅ 현재 URL 정보 가져오기
         </table>
       </div>
 
-      {/* 🔹 페이지네이션 */}
       {filteredPosts.length > 0 && (
         <div className={styles.pagination}>
           <button disabled={currentPage === 1} onClick={() => setCurrentPage(currentPage - 1)}>이전</button>
@@ -108,7 +130,6 @@ const location = useLocation(); // ✅ 현재 URL 정보 가져오기
         </div>
       )}
 
-      {/* 🔹 글쓰기 버튼 */}
       <button className={styles.writeButton} onClick={handleWriteClick}>
         글쓰기
       </button>

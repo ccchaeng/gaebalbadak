@@ -7,15 +7,15 @@ const QuestionContainer = ({
   title, setTitle, 
   content, setContent, 
   selectedCategory, setSelectedCategory, 
-  categories, onCancel 
+  categories, onCancel, 
+  categoryTitle // ✅ "모집 분야" 문구를 props로 받음
 }) => {
-  const [dropdownOpen, setDropdownOpen] = useState(false); // ✅ 드롭다운 상태 추가
-  const navigate = useNavigate(); // ✅ 페이지 이동을 위한 훅
-  const location = useLocation(); // ✅ 현재 URL 확인
-  const [images, setImages] = useState([]); // 🔥 업로드된 이미지 상태
-  const boardType = location.pathname.startsWith("/write2") ? "collaboration" : "question"; // ✅ 게시판 구분
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [images, setImages] = useState([]);
+  const boardType = location.pathname.startsWith("/write2") ? "collaboration" : "question"; 
 
-  // ✅ 이미지 업로드 핸들러 (Base64 변환)
   const handleImageUpload = (event) => {
     const files = Array.from(event.target.files);
     const toBase64 = (file) => new Promise((resolve, reject) => {
@@ -30,29 +30,27 @@ const QuestionContainer = ({
     });
   };
 
-  // ✅ 이미지 삭제 핸들러
   const handleDeleteImage = (index) => {
     setImages((prevImages) => prevImages.filter((_, i) => i !== index));
   };
 
-  // ✅ 글쓰기 버튼 클릭 시 실행
   const handleSubmit = async () => {
     const postId = await savePost(title, content, selectedCategory, images, boardType);
   
     if (postId) {
       const redirectPath = boardType === "question" 
-        ? `/question/${postId}` // ✅ 질문할래 게시판이면 /question/:postId
-        : `/collaboration/${postId}`; // ✅ 같이할래 게시판이면 /collaboration/:postId
-        console.log(`🔄 페이지 이동: ${redirectPath}`);  // ✅ 페이지 이동 로그 확인
+        ? `/question/${postId}` 
+        : `/collaboration/${postId}`; 
+      console.log(`🔄 페이지 이동: ${redirectPath}`);  
       navigate(redirectPath);
-    }else {
+    } else {
       console.error("❌ postId가 없습니다. 페이지 이동 취소");
     }
   };
 
   return (
     <div className={styles.container}>
-      {/* 🔥 제목 + 모집 분야 선택 */}
+      {/* 🔥 제목 + "모집 분야" 선택 */}
       <div className={styles.titleRow}>
         <input
           type="text"
@@ -62,7 +60,8 @@ const QuestionContainer = ({
           onChange={(e) => setTitle(e.target.value)}
         />
         <div className={styles.extraBox} onClick={() => setDropdownOpen(!dropdownOpen)}>
-          {selectedCategory || "모집 분야"} <span>▼</span>
+          {selectedCategory || categoryTitle} {/* ✅ props로 받은 문구 사용 */}
+          <span>▼</span>
           {dropdownOpen && categories.length > 0 && (
             <div className={styles.dropdownContent}>
               {categories.map((cat) => (
