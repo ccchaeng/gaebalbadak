@@ -14,6 +14,34 @@ const ProfileInfo = ({ user }) => {
     const [nickname, setNickname] = useState(user.nickname); // 닉네임 상태 관리
     const [photo, setPhoto] = useState(user.photoURL); // 프로필 상태 관리
 
+    // 이미지 파일 Base64로 변환하여 Firestore 저장
+    const handleImageChange = (e) => {
+        if (!e.target.files || e.target.files.length === 0) {
+            console.error("파일이 선택되지 않았습니다.");
+            return;
+        }
+
+        const file = e.target.files[0];
+        const reader = new FileReader();
+
+        reader.onloadend = async () => {
+            const base64String = reader.result; // Base64 변환된 이미지 데이터
+
+            // 상태 업데이트 (UI 반영)
+            setPhoto(base64String);
+
+            // Firestore 업데이트
+            try {
+                const userDoc = doc(db, "users", user.uid);
+                await updateDoc(userDoc, { photoURL: base64String });
+            } catch (error) {
+                console.error("이미지 저장 오류:", error);
+            }
+        };
+
+        reader.readAsDataURL(file); // 파일을 Base64 형식으로 변환
+    };
+
     // Firestore 사용자 정보 업데이트 함수
     const handleSave = async () => {
         // 사용자 정보 올바르게 제공 안 됐으면 업데이트 중지
@@ -50,7 +78,7 @@ const ProfileInfo = ({ user }) => {
             <ProfileImage photoURL={photo} nickname={nickname} className={styles.profileImage} />
 
             {/* 수정 모드일 때만 이미지 파일 업로드 표시  */}
-            {editing && <input type="file" accept="image/*" onChange={(e) => setPhoto(URL.createObjectURL(e.target.files[0]))} />}
+            {editing && <input type="file" accept="image/*" onChange={handleImageChange} />}
 
             {/* 사용자 정보 */}
             <div className={styles.profileDetails}>
