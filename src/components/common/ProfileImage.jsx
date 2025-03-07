@@ -6,7 +6,7 @@ const ProfileImage = ({ photoURL, nickname, className }) => {
     return (
         <div className={`${styles.profileContainer} ${className}`}>
             <img
-                src={photoURL && photoURL !== "" ? photoURL : default_profile}
+                src={photoURL && photoURL.startsWith("data:image/") ? photoURL : default_profile}
                 alt="프로필"
                 className={styles.profileImage}
                 title={nickname || "사용자"}
