@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Layout from './components/layout/Layout_TEMP';
-import Home from './pages/home/Home_TEMP';
+import Home from './pages/home/Home';
 import Question from './pages/Question';
 import QuestionDetail from "./pages/QuestionDetail"
 import ApplyDetail from "./pages/ApplyDetail"
