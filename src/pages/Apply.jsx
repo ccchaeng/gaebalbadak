@@ -2,7 +2,14 @@ import React, { useState, useEffect } from "react";
 import { auth, db } from "../firebase";
 import { useNavigate } from "react-router-dom";
 import { onAuthStateChanged, signOut } from "firebase/auth";
-import { doc, getDoc, collection, query, orderBy, getDocs } from "firebase/firestore"; // ✅ Firestore 관련 함수 추가
+import {
+  doc,
+  getDoc,
+  collection,
+  query,
+  orderBy,
+  getDocs,
+} from "firebase/firestore"; // ✅ Firestore 관련 함수 추가
 import bannerImage from "../assets/banner3.jpg";
 import Banner from "../components/common/Banner";
 import SearchBar from "../components/common/SearchBar";
@@ -21,7 +28,10 @@ function Apply() {
     const fetchPosts = async () => {
       try {
         console.log("🔥 Firestore에서 데이터 가져오는 중...");
-        const q = query(collection(db, "post_Apply"), orderBy("createdAt", "desc")); // ✅ 최신순 정렬
+        const q = query(
+          collection(db, "post_Apply"),
+          orderBy("createdAt", "desc")
+        ); // ✅ 최신순 정렬
         const querySnapshot = await getDocs(q);
 
         const postsData = querySnapshot.docs.map((doc) => ({
@@ -49,7 +59,10 @@ function Apply() {
 
         if (userSnap.exists()) {
           const userData = userSnap.data();
-          setIsAdmin(userData.email === "cjh5779@naver.com" || userData.email === "kim020405@naver.com"); // ✅ 여러 관리자 설정
+          setIsAdmin(
+            userData.email === "cjh5779@naver.com" ||
+              userData.email === "kim020405@naver.com"
+          ); // ✅ 여러 관리자 설정
         } else {
           setIsAdmin(false);
         }
@@ -65,7 +78,10 @@ function Apply() {
   // ✅ 페이지네이션 계산
   const indexOfLastPost = currentPage * pageSize;
   const indexOfFirstPost = indexOfLastPost - pageSize;
-  const currentDisplayedPosts = currentPosts.slice(indexOfFirstPost, indexOfLastPost);
+  const currentDisplayedPosts = currentPosts.slice(
+    indexOfFirstPost,
+    indexOfLastPost
+  );
   const totalPages = Math.ceil(currentPosts.length / pageSize);
 
   return (
@@ -93,27 +109,26 @@ function Apply() {
               </tr>
             </thead>
             <tbody>
-              {currentDisplayedPosts.length > 0 ? (
-                currentDisplayedPosts.map((post) => (
-                  <tr
-                    key={post.id}
-                    onClick={() => navigate(`/apply/${post.id}`)} // ✅ Firestore의 실제 post.id 사용
-                    className={styles.clickableRow}
-                  >
-                    <td>{post.title || "-"}</td>
-                    <td>{post.category || "-"}</td>
-                    <td>
-                      {post.createdAt?.seconds
-                        ? new Date(post.createdAt.seconds * 1000).toLocaleDateString()
-                        : "-"}
-                    </td>
-                  </tr>
-                ))
-              ) : (
-                <tr>
-                  <td colSpan="3">공지사항이 없습니다.</td>
-                </tr>
-              )}
+              {currentDisplayedPosts.length > 0
+                ? currentDisplayedPosts.map((post) => (
+                    <tr
+                      key={post.id}
+                      onClick={() => navigate(`/apply/${post.id}`)} // ✅ Firestore의 실제 post.id 사용
+                      className={styles.clickableRow}
+                    >
+                      <td>{post.title || "-"}</td>
+                      <td>{post.category || "-"}</td>
+                      <td>
+                        {post.createdAt?.seconds
+                          ? new Date(
+                              post.createdAt.seconds * 1000
+                            ).toLocaleDateString()
+                          : "-"}
+                      </td>
+                    </tr>
+                  ))
+                : null}{" "}
+              {/* ✅ 불필요한 공백 방지 위해 `null` 반환 */}
             </tbody>
           </table>
         </div>
@@ -123,7 +138,10 @@ function Apply() {
       {currentPosts.length > 0 && (
         <div className={styles.paginationContainer}>
           <div className={styles.pagination}>
-            <button disabled={currentPage === 1} onClick={() => setCurrentPage(currentPage - 1)}>
+            <button
+              disabled={currentPage === 1}
+              onClick={() => setCurrentPage(currentPage - 1)}
+            >
               이전
             </button>
             <span className={styles.pageNumbers}>
@@ -137,14 +155,20 @@ function Apply() {
                 </button>
               ))}
             </span>
-            <button disabled={currentPage === totalPages} onClick={() => setCurrentPage(currentPage + 1)}>
+            <button
+              disabled={currentPage === totalPages}
+              onClick={() => setCurrentPage(currentPage + 1)}
+            >
               다음
             </button>
           </div>
           {/* ✅ 관리자만 글쓰기 버튼 보이기 */}
           {isAdmin && (
             <div className={styles.adminActions}>
-              <button className={styles.writeButton} onClick={() => navigate("/write3")}>
+              <button
+                className={styles.writeButton}
+                onClick={() => navigate("/write3")}
+              >
                 글쓰기
               </button>
             </div>
