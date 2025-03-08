@@ -41,7 +41,7 @@ function Apply() {
           const userData = userSnap.data();
 
           // ✅ 특정 이메일만 관리자로 설정
-          if (userData.email === "cjh5779@naver.com") {
+          if (userData.email === "cjh5779@naver.com","kim020405@naver.com") {
             setIsAdmin(true);
           } else {
             setIsAdmin(false);
