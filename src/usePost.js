@@ -1,14 +1,7 @@
 import { db } from "./firebase";
-import { collection, addDoc, serverTimestamp } from "firebase/firestore"; // ✅ `collection` 추가
+import { collection, addDoc, serverTimestamp, getDoc, doc } from "firebase/firestore";
+import { getAuth } from "firebase/auth"; // ✅ Firebase 인증 가져오기
 
-/**
- * 🔥 게시글 저장 함수 (게시판에 따라 다르게 저장)
- * @param {string} title - 제목
- * @param {string} content - 내용
- * @param {string} category - 선택된 모집 분야
- * @param {string[]} images - Base64 인코딩된 이미지 배열
- * @param {string} boardType - 게시판 타입 ("question" 또는 "collaboration")
- */
 export const savePost = async (title, content, category, images, boardType) => {
   if (!title || !content) {
     alert("❌ 제목과 내용을 입력해주세요!");
@@ -17,21 +10,40 @@ export const savePost = async (title, content, category, images, boardType) => {
 
   try {
     console.log("🔥 Firestore 저장 시작...");
-    
-    // ✅ 게시판에 따라 Firestore 컬렉션을 다르게 지정
+
+    const auth = getAuth(); 
+    const user = auth.currentUser; // ✅ 현재 로그인한 사용자 가져오기
+    let nickname = "익명"; // 기본값
+    let authorUid = null;  // ✅ UID 저장할 변수 추가
+
+    if (user) {
+      authorUid = user.uid; // ✅ 사용자 UID 저장
+
+      // ✅ Firestore에서 users 컬렉션에서 닉네임 가져오기
+      const userRef = doc(db, "users", user.uid);
+      const userSnap = await getDoc(userRef);
+
+      if (userSnap.exists()) {
+        nickname = userSnap.data().nickname || "익명";
+      }
+    }
+
     const collectionName = boardType === "question" ? "posts_question" : "posts_collaboration";
-    const postRef = collection(db, collectionName); // ✅ `collection` 오류 해결
+    const postRef = collection(db, collectionName);
 
     const docRef = await addDoc(postRef, {
       title,
       content,
       category,
-      images, // ✅ Base64 이미지 저장
-      createdAt: serverTimestamp(), // Firestore 서버 타임스탬프 추가
+      images,
+      nickname, // ✅ 닉네임 저장
+      authorUid, // ✅ 사용자 UID 저장 (닉네임을 나중에 가져올 때 사용)
+      createdAt: serverTimestamp(),
     });
 
-    console.log("✅ Firestore 저장 완료! 문서 ID:", docRef.id);
-    return docRef.id; // ✅ 저장된 문서 ID 반환 (postId)
+    console.log("✅ Firestore 저장 완료! ID:", docRef.id);
+    return docRef.id;
+
   } catch (error) {
     console.error("❌ 게시글 저장 중 오류 발생:", error);
     alert("게시글 등록에 실패했습니다.");
