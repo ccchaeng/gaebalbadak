@@ -131,7 +131,11 @@ function Apply() {
                 currentDisplayedPosts
                   .filter(Boolean) // ✅ undefined나 null 값 제거
                   .map((post) => (
-                    <tr key={post.id}>
+                    <tr
+                      key={post.id}
+                      onClick={() => navigate(`/apply/${post.id}`)} // ✅ 클릭하면 상세 페이지로 이동
+                      className={styles.clickableRow} // ✅ 클릭 가능한 스타일 추가
+                    >
                       <td>{post.title || "-"}</td>
                       <td>{post.category || "-"}</td>
                       <td>

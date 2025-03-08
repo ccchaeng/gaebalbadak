@@ -4,6 +4,7 @@ import Layout from './components/layout/Layout_TEMP';
 import Home from './pages/home/Home_TEMP';
 import Question from './pages/Question';
 import QuestionDetail from "./pages/QuestionDetail"
+import ApplyDetail from "./pages/ApplyDetail"
 import Collaboration from './pages/Collaboration';
 import Apply from './pages/Apply';
 import Login from './pages/Login';
@@ -30,6 +31,7 @@ function App() {
           <Route path="/write" element={<WriteQuestion />} />
           <Route path="/write2" element={<WriteQuestion2 />} />
           <Route path="/write3" element={<WriteQuestion3 />} />
+          <Route path="/apply/:postId" element={<ApplyDetail />} />
         </Route>
 
         {/* Layout이 필요 없는 개별 페이지 */}
