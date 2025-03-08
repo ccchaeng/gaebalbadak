@@ -1,8 +1,7 @@
-// 카드 전체 박스 스타일
 .contentBox {
-  width: 30%; /* 🔥 카드 너비 자동 조정 */
-  min-width: 400px; /* 🔥 최소 너비 설정 */
-  max-width: 500px; /* 🔥 최대 너비 설정 */
+  width: 30%;
+  min-width: 400px;
+  max-width: 500px;
   background: white;
   padding: 25px;
   border-radius: 16px;
@@ -10,8 +9,8 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  height: 350px; /* 🔥 카드 높이 동일하게 조정 */
-  overflow: hidden;
+  height: 390px; /* 🔥 고정 높이 설정 (원하는 크기로 조정) */
+  overflow: hidden; /* 🔥 내용이 넘칠 경우 숨김 */
 }
 
 
@@ -24,51 +23,65 @@
   padding: 0 20px;
   justify-content: center;
   align-items: start; /* 🔥 카드들이 위에서 정렬되도록 설정 */
+  margin-bottom: 20px; /* 🔥 푸터와의 간격 추가 */
+
 }
 
-  // 제목 + 더보기 링크 스타일
-  .contentHeader {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-  
-    h2 {
-      font-size: 18px;
-      font-weight: bold;
-    }
-  
-    .moreLink {
-      text-decoration: none;
-      color: #007bff;
-      font-weight: bold;
-    }
+.contentHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0px !important; /* 🔥 리스트와의 간격을 없앰 */
+  padding: 0 10px;
+
+  h2 {
+    font-size: 20px; /* 🔥 제목 크기 살짝 키우기 */
+    font-weight: bold;
+    text-align: left; /* 🔥 왼쪽 정렬 */
   }
+
+  .moreLink {
+    text-decoration: none;
+    color: #007bff; /* 🔥 파란색으로 유지 */
+    font-weight: bold;
+    font-size: 14px; /* 🔥 더보기 링크 크기 조정 */
+  }
+}
+
   
-  // 리스트 스타일
   .contentList {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 8px; /* 🔥 리스트 간격을 더 줄임 */
+    padding: 1px; /* 🔥 상하 패딩 제거 */
+    margin-top: 15px; /* 🔥 리스트 위쪽 여백 제거 */
   }
   
-  // 개별 리스트 아이템 스타일
+  
   .contentItem {
-    background: #f9f9f9;
-    padding: 12px;
+    background: #f9f9f9; /* 🔥 배경색 */
+    padding: 14px;
     border-radius: 8px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    text-decoration: none;
-    color: black;
-    font-weight: bold;
+    text-decoration: none; /* 🔥 밑줄 제거 */
+    color: #333 !important; /* 🔥 글씨 검은색으로 */
+    font-weight: bold; /* 🔥 글씨 굵게 */
+    font-size: 16px;
     transition: background 0.3s;
   
     &:hover {
-      background: #ebebeb;
+      background: #e0e0e0;
     }
   }
+
+  .contentItem a {
+    text-decoration: none !important; /* 🔥 밑줄 제거 */
+    color: inherit !important; /* 🔥 부모 요소 색상 상속 (검은색 유지) */
+    font-weight: bold;
+  }
+  
   
   // 화살표 스타일
   .arrow {
