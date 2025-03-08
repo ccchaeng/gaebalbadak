@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, doc, getDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 import styles from "./Box.module.scss";
 
-const Box = ({ tabs, categoryTitle }) => { // ✅ `categoryTitle` 추가
+const Box = ({ tabs, categoryTitle }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [activeTab, setActiveTab] = useState("전체");
@@ -21,10 +21,26 @@ const Box = ({ tabs, categoryTitle }) => { // ✅ `categoryTitle` 추가
 
       try {
         const querySnapshot = await getDocs(collection(db, collectionName));
-        const postData = querySnapshot.docs.map(doc => ({
-          id: doc.id,
-          ...doc.data()
-        }));
+        const postData = await Promise.all(
+          querySnapshot.docs.map(async (docSnapshot) => {
+            const post = docSnapshot.data();
+            let nickname = "익명"; // 기본값
+
+            if (post.authorUid) {
+              const userDoc = await getDoc(doc(db, "users", post.authorUid));
+              if (userDoc.exists()) {
+                nickname = userDoc.data().nickname || "익명";
+              }
+            }
+
+            return {
+              id: docSnapshot.id,
+              ...post,
+              nickname, // ✅ 글쓴이 닉네임 추가
+            };
+          })
+        );
+
         setPosts(postData);
       } catch (error) {
         console.error("❌ Firestore 데이터 불러오기 실패:", error);
@@ -63,7 +79,7 @@ const Box = ({ tabs, categoryTitle }) => { // ✅ `categoryTitle` 추가
           onClick={() => { setActiveTab("전체"); setCurrentPage(1); }} 
           style={{ cursor: "pointer" }}
         >
-          {categoryTitle} {/* ✅ 전달받은 "모집분야" 문구를 표시 */}
+          {categoryTitle}
         </span>
         <div className={styles.tabContainer}>
           {tabs.map((tab) => (
@@ -100,7 +116,7 @@ const Box = ({ tabs, categoryTitle }) => { // ✅ `categoryTitle` 추가
                 <tr key={post.id} onClick={() => handlePostClick(post.id)} style={{ cursor: "pointer" }}>
                   <td>{post.title || "-"}</td>
                   <td>{post.language || "-"}</td>  
-                  <td>{post.author || "-"}</td>
+                  <td>{post.nickname || "익명"}</td>  {/* ✅ Firestore에서 가져온 닉네임 표시 */}
                   <td>{post.comments !== undefined ? post.comments : "-"}</td>
                   <td>{post.likes !== undefined ? post.likes : "-"}</td>
                   <td>{post.level || "-"}</td>

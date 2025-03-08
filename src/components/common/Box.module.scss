@@ -82,33 +82,38 @@
     overflow-x: auto; /* ⭐ 내용이 넘치면 스크롤 */
     padding: 10px; /* ⭐ 여백 추가 */
   }
-  
   /* 🔹 테이블 스타일 */
-  .table {
-    width: 100%; /* ⭐ 부모 요소를 넘어가지 않도록 */
-    max-width: 100%; /* ⭐ 컨테이너 너비 유지 */
-    border-collapse: collapse;
-    text-align: center;
-    table-layout: fixed; /* ⭐ 테이블 셀 너비 균등 조정 */
-  }
-  
-  /* 🔹 테이블 헤더 */
-  .table th {
-    background-color: #f8f8f8;
+.table {
+  width: 100%; /* 🔥 부모 컨테이너 너비에 맞춤 */
+  border-collapse: collapse;
+  text-align: center;
+  table-layout: fixed; /* 🔥 테이블 균일하게 정렬 */
+}
+
+/* 🔹 테이블 헤더 */
+.table th {
+  background-color: #f8f8f8;
   padding: 12px;
   border-bottom: 2px solid #ddd;
   font-weight: bold;
   text-align: center;
-  white-space: nowrap; /* ⭐ 줄 바꿈 방지 */
-  }
-  
-  /* 🔹 테이블 본문 */
-  .table td {
-    padding: 15px;
-    border-bottom: 1px solid #ddd;
-    text-align: center;
-    word-wrap: break-word; /* ⭐ 긴 텍스트 줄 바꿈 */
-  }
+  white-space: nowrap;
+  min-width: 100px; /* 🔥 최소 너비 설정 */
+}
+
+/* 🔹 테이블 본문 */
+.table td {
+  padding: 15px;
+  border-bottom: 1px solid #ddd;
+  text-align: center;
+  min-width: 100px; /* 🔥 최소 너비 설정 */
+}
+
+/* 🔹 작성일 컬럼 크기 조정 */
+.table th:last-child, 
+.table td:last-child {
+  min-width: 140px; /* 🔥 작성일 최소 너비 설정 */
+}
   
   /* 🔹 테이블 행 호버 효과 */
   .table tr:hover {
