@@ -15,8 +15,8 @@ function ApplyDetail() {
       <div className={styles.bannerWrapper}>
         <Banner
           image={bannerImage}
-          title="같이할래?"
-          description="저희 프로젝트에 함께 참여해보시는 건 어떨까요?"
+          title="신청할래?"
+          description="대외활동, 공모전, 지원사업! 지금 바로 신청할래?"
           className={styles.customBanner}
         />
       </div>
