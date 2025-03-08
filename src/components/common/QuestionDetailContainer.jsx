@@ -76,7 +76,7 @@ function QuestionDetailContainer() {
       {/* 🔥 게시글 내용 */}
       <div className={styles.content}>
         <p className={styles.postContent}>{post.content}</p>
-        {Array.isArray(post.images) && post.images.length > 0 ? (
+        {post.images && post.images.length > 0 && (
           <div className={styles.imageContainer}>
             {post.images.map((image, index) => (
               <img
@@ -87,8 +87,6 @@ function QuestionDetailContainer() {
               />
             ))}
           </div>
-        ) : (
-          <p>이미지가 없습니다.</p> // ✅ 이미지가 없을 때 오류 방지
         )}
       </div>
 
