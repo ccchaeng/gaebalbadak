@@ -31,9 +31,9 @@ function Home() {
 
         // ✅ Firestore에서 데이터를 가져와 상태 업데이트
         await Promise.all([
-          fetchData("post_question", setQuestions),
-          fetchData("post_collaboration", setCollaborations),
-          fetchData("post_apply", setApplications),
+          fetchData("posts_question", setQuestions),
+          fetchData("posts_collaboration", setCollaborations),
+          fetchData("post_Apply", setApplications),
         ]);
 
         console.log("✅ Firestore 데이터 가져오기 완료!");
