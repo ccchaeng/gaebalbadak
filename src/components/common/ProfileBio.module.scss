@@ -1,0 +1,57 @@
+.bioContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    flex: 1;
+
+    border-radius: 12px;
+    padding: 20px;
+    margin: 1%;
+
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .bioText {
+    font-size: 16px;
+    line-height: 1.5;
+    flex-grow: 1;
+  }
+  
+  .bioInput {
+    width: 100%;
+    height: 80px;
+
+    flex-grow: 1;
+
+    font-size: 16px;
+    padding: 8px;
+
+    border-radius: 8px;
+    border: 1px solid #ccc;
+
+    resize: none;
+  }
+  
+  .editButton,
+  .saveButton {
+    align-self: flex-end;
+
+    width: 8%;
+    padding: 8px 16px;
+    margin-top: 20px;
+
+    background-color: #7FD1AE;
+    border-radius: 6px;
+
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    font-size: 14px;
+    font-weight: bold;
+
+    &:hover {
+      background-color: #6db696;
+    }
+  }
+  
