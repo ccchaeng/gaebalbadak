@@ -9,6 +9,7 @@ import Banner from "../components/common/Banner";
 import SearchBar from "../components/common/SearchBar";
 import ProfileInfo from '../components/common/ProfileInfo';
 import ProfileBio from '../components/common/ProfileBio';
+import ProfileProject from '../components/common/ProfileProject';
 
 const Profile = () => {
   const { user } = useAuth();
@@ -36,7 +37,11 @@ const Profile = () => {
         {/* 프로필 정보 */}
         <ProfileInfo user={user} />
         {/* 프로필 자기소개 */}
-        <ProfileBio  user={user} />
+        <ProfileBio user={user} />
+      </div>
+      <div>
+        {/* 프로필 프로젝트란 */}
+        <ProfileProject user={user} />
       </div>
     </div>
   );
