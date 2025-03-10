@@ -4,6 +4,7 @@ import { getDoc, doc } from "firebase/firestore";
 import { db } from "../../firebase";
 import { addComment, listenToComments } from "../../firebaseUtils"; // ✅ 댓글 기능 추가
 import styles from "./ApplyDetailContainer.module.scss";
+import ProfileImage from "./ProfileImage";
 
 function ApplyDetailContainer() {
   const { postId } = useParams();
@@ -94,35 +95,30 @@ function ApplyDetailContainer() {
         <h3>댓글</h3>
         {comments.length > 0 ? (
           <ul className={styles.commentsList}>
-            {comments.map((comment) => (
-              <li key={comment.id} className={styles.commentItem}>
-                {/* ✅ 프로필 사진 */}
-                {comment.profileImage ? (
-                  <img
-                    src={comment.profileImage}
-                    alt="프로필"
-                    className={styles.profileImage}
-                  />
-                ) : (
-                  <div className={styles.defaultProfile}></div> // 기본 프로필 이미지
-                )}
-                {/* ✅ 닉네임 & 날짜 & 댓글 내용 */}
-                <div className={styles.commentContentBox}>
-                  <div className={styles.commentHeader}>
-                    <span className={styles.nickname}>{comment.nickname}</span>
-                    <span className={styles.commentDate}>
-                      {comment.createdAt?.seconds
-                        ? new Date(
-                            comment.createdAt.seconds * 1000
-                          ).toLocaleString()
-                        : "방금 전"}
-                    </span>
-                  </div>
-                  <p className={styles.commentContent}>{comment.content}</p>
+          {comments.map((comment) => (
+            <li key={comment.id} className={styles.commentItem}>
+              {/* ✅ 프로필 이미지 표시 */}
+              <ProfileImage
+                photoURL={comment.profileImage}
+                nickname={comment.nickname}
+                className={styles.profileImage}
+              />
+
+              {/* ✅ 닉네임 & 댓글 내용 */}
+              <div className={styles.commentContentBox}>
+                <div className={styles.commentHeader}>
+                  <span className={styles.nickname}>{comment.nickname}</span>
+                  <span className={styles.commentDate}>
+                    {comment.createdAt?.seconds
+                      ? new Date(comment.createdAt.seconds * 1000).toLocaleString()
+                      : "방금 전"}
+                  </span>
                 </div>
-              </li>
-            ))}
-          </ul>
+                <p className={styles.commentContent}>{comment.content}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
         ) : (
           <p>아직 댓글이 없습니다.</p>
         )}
