@@ -21,7 +21,11 @@ export const getUserInfo = async (userId) => {
     const userRef = doc(db, "users", userId);
     const userSnap = await getDoc(userRef);
     if (userSnap.exists()) {
-      return userSnap.data(); // ✅ 닉네임 & 프로필 사진 포함
+      const userData = userSnap.data();
+      return {
+        nickname: userData.nickname || "익명",
+        profileImage: userData.photoURL || "/default_profile.png",
+      };
     } else {
       console.log("❌ 사용자 정보를 찾을 수 없습니다.");
       return null;
@@ -48,17 +52,17 @@ export const addComment = async (postId, boardType, commentText) => {
   }
 
   try {
-    // ✅ Firestore에서 사용자 정보 가져오기
+    // Firestore에서 사용자 정보 가져오기
     const userInfo = await getUserInfo(user.uid);
     const nickname = userInfo?.nickname || "익명"; // 닉네임 없으면 익명
-    const profileImage = userInfo?.profileImage || ""; // 프로필 사진 없으면 빈 값
+    const profileImage = userInfo?.profileImage || "/default_profile.png"; // 프로필 사진이 없으면 기본 이미지 사용
 
-    // ✅ 올바른 게시판 경로에 댓글 추가
+    // Firestore에 댓글 추가
     await addDoc(collection(db, boardType, postId, "comments"), {
       content: commentText,
       userId: user.uid,
       nickname: nickname,
-      profileImage: profileImage, // ✅ 프로필 사진 추가
+      profileImage: profileImage, // 프로필 사진 추가
       createdAt: serverTimestamp(),
     });
 
@@ -84,12 +88,24 @@ export const listenToComments = (postId, boardType, setComments) => {
       orderBy("createdAt", "asc")
     );
 
-    // ✅ 실시간 댓글 업데이트
-    const unsubscribe = onSnapshot(q, (querySnapshot) => {
-      const commentsArray = querySnapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
+    // 실시간 댓글 업데이트
+    const unsubscribe = onSnapshot(q, async (querySnapshot) => {
+      const commentsArray = await Promise.all(
+        querySnapshot.docs.map(async (docSnapshot) => {
+          const commentData = docSnapshot.data();
+
+          // profileImage가 비어있으면 Firestore에서 보완
+          if (!commentData.profileImage) {
+            const userRef = doc(db, "users", commentData.userId);
+            const userSnap = await getDoc(userRef);
+            const userData = userSnap.exists() ? userSnap.data() : { photoURL: "/default_profile.png" };
+            
+            return { id: docSnapshot.id, ...commentData, profileImage: userData.photoURL };
+          }
+          return { id: docSnapshot.id, ...commentData };
+        })
+      );
+
       setComments(commentsArray);
     });
 
