@@ -48,9 +48,11 @@ const ProfileBio = ({ user }) => {
                 <p className={styles.bioText}>{bio}</p>
             )}
 
-            <Button className={styles.bioButton} onClick={() => (editing ? handleSave() : setEditing(true))}>
-                {editing ? "저장" : "수정"}
-            </Button>
+            {editing ? (
+                <Button text="저장" onClick={handleSave} className={styles.saveButton} />
+            ) : (
+                <Button text="수정" onClick={() => setEditing(true)} className={styles.editButton} />
+            )}
         </div>
     )
 }
