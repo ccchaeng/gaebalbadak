@@ -1,9 +1,12 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"
 import styles from "./ProfileInfo.module.scss";
 
 // 파이어베이스
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase"; // Firestore 인스턴스 가져오기
+import { signOut } from "firebase/auth";
+import { auth } from "../../firebase";
 
 // 컴포넌트
 import ProfileImage from "./ProfileImage";
@@ -13,6 +16,7 @@ const ProfileInfo = ({ user }) => {
     const [editing, setEditing] = useState(false); // 수정 모드 여부 관리
     const [nickname, setNickname] = useState(user.nickname); // 닉네임 상태 관리
     const [photo, setPhoto] = useState(user.photoURL); // 프로필 상태 관리
+    const navigate = useNavigate(); // 페이지 이동
 
     // 이미지 파일 Base64로 변환하여 Firestore 저장
     const handleImageChange = (e) => {
@@ -70,6 +74,16 @@ const ProfileInfo = ({ user }) => {
             console.error("프로필 업데이트 오류:", error);
         }
     };
+
+    // 로그아웃 기능
+    const handleLogout = async () => {
+        try {
+            await signOut(auth); // Firebase 로그아웃
+            navigate("/"); // 홈 화면으로 이동
+        } catch (error) {
+            console.error("로그아웃 오류:", error);
+        }
+    };
     
 
     return (
@@ -96,12 +110,14 @@ const ProfileInfo = ({ user }) => {
                 <p>티어 점수: {user.tier}</p>
             </div>
 
-            {/* 수정 모드에 따른 버튼 변경 */}
-            {editing ? (
-                <Button text="저장" onClick={handleSave} className={styles.saveButton} />
-            ) : (
-                <Button text="수정" onClick={() => setEditing(true)} className={styles.editButton} />
-            )}
+            <div className={styles.buttonContainer}>
+                {editing ? (
+                    <Button text="저장" onClick={handleSave} className={styles.saveButton} />
+                ) : (
+                    <Button text="수정" onClick={() => setEditing(true)} className={styles.editButton} />
+                )}
+                <Button text="로그아웃" onClick={handleLogout} className={styles.logoutButton} />
+            </div>
         </div>
     );
 };
