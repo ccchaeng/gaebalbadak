@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from "./Profile.module.scss";
 
 import useAuth from "../hooks/useAuth"; // 현재 로그인된 사용자의 uid 가져오기 위함
@@ -8,6 +8,7 @@ import bannerImage from "../assets/banner3.jpg";
 import Banner from "../components/common/Banner";
 import SearchBar from "../components/common/SearchBar";
 import ProfileInfo from '../components/common/ProfileInfo';
+import ProfileBio from '../components/common/ProfileBio';
 
 const Profile = () => {
   const { user } = useAuth();
@@ -15,14 +16,6 @@ const Profile = () => {
   if (!user) {
     return <p>로그인이 필요합니다.</p>;
   }
-
-  const userInfo = {
-    nickname: user.displayName || "익명",
-    email: user.email,
-    photoURL: user.photoURL,
-    passionScore: 243,  // 예시 (실제 데이터 연동 필요)
-    tier: "골드",       // 예시 (실제 데이터 연동 필요)
-  };
 
   return (
     <div className={styles.profileContainer}>
@@ -42,6 +35,8 @@ const Profile = () => {
       <div className={styles.infoContainer}>
         {/* 프로필 정보 */}
         <ProfileInfo user={user} />
+        {/* 프로필 자기소개 */}
+        <ProfileBio  user={user} />
       </div>
     </div>
   );
