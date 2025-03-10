@@ -92,17 +92,24 @@ const ProfileProject = ({ user }) => {
     };
     
 
-    const handleDeleteProject = async (index) => {
+    const handleDeleteProject = (index) => {
         if (!user) return;
-
-        const updatedProjects = projects.filter((_, i) => i !== index);
-
-        const userDoc = doc(db, "users", user.uid);
-        await updateDoc(userDoc, { projects: updatedProjects });
-
+    
+        const confirmDelete = window.confirm("해당 프로젝트를 삭제하시겠습니까?");
+        
+        if (!confirmDelete) return;
+    
+        const updatedProjects = [...projects];
+        updatedProjects.splice(index, 1);
+    
         setProjects(updatedProjects);
-        setEditModes(editModes.filter((_, i) => i !== index));
+    
+        const userDoc = doc(db, "users", user.uid);
+        updateDoc(userDoc, { projects: updatedProjects })
+            .then(() => console.log("프로젝트 삭제 완료"))
+            .catch((error) => console.error("삭제 오류:", error));
     };
+    
 
     const nextSlide = () => {
         if (currentIndex < projects.length - 3) {
