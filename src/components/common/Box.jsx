@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { collection, getDocs, doc, getDoc, onSnapshot } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  doc,
+  getDoc,
+  onSnapshot,
+} from "firebase/firestore";
 import { db } from "../../firebase";
 import styles from "./Box.module.scss";
 
@@ -15,9 +21,9 @@ const Box = ({ tabs, categoryTitle }) => {
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const collectionName = location.pathname.startsWith("/question") 
-        ? "posts_question" 
-        : "posts_collaboration"; 
+      const collectionName = location.pathname.startsWith("/question")
+        ? "posts_question"
+        : "posts_collaboration";
 
       try {
         const querySnapshot = await getDocs(collection(db, collectionName));
@@ -48,10 +54,15 @@ const Box = ({ tabs, categoryTitle }) => {
 
         // ✅ Firestore 실시간 댓글 개수 업데이트
         postData.forEach((post) => {
-          const commentsRef = collection(db, collectionName, post.id, "comments");
+          const commentsRef = collection(
+            db,
+            collectionName,
+            post.id,
+            "comments"
+          );
           const unsubscribe = onSnapshot(commentsRef, (snapshot) => {
-            setPosts((prevPosts) => 
-              prevPosts.map((p) => 
+            setPosts((prevPosts) =>
+              prevPosts.map((p) =>
                 p.id === post.id ? { ...p, commentsCount: snapshot.size } : p
               )
             );
@@ -59,7 +70,6 @@ const Box = ({ tabs, categoryTitle }) => {
 
           return () => unsubscribe(); // ✅ 언마운트 시 구독 해제
         });
-
       } catch (error) {
         console.error("❌ Firestore 데이터 불러오기 실패:", error);
       }
@@ -68,15 +78,18 @@ const Box = ({ tabs, categoryTitle }) => {
     fetchPosts();
   }, [location.pathname]);
 
-  const filteredPosts = activeTab === "전체" ? posts : posts.filter(post => post.category === activeTab);
+  const filteredPosts =
+    activeTab === "전체"
+      ? posts
+      : posts.filter((post) => post.category === activeTab);
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
   const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
 
   const handlePostClick = (postId) => {
-    const detailPath = location.pathname.startsWith("/question") 
-      ? `/question/${postId}` 
+    const detailPath = location.pathname.startsWith("/question")
+      ? `/question/${postId}`
       : `/collaboration/${postId}`;
     navigate(detailPath);
   };
@@ -92,9 +105,12 @@ const Box = ({ tabs, categoryTitle }) => {
   return (
     <div className={styles.outerBox}>
       <div className={styles.innerBox1}>
-        <span 
-          className={styles.category} 
-          onClick={() => { setActiveTab("전체"); setCurrentPage(1); }} 
+        <span
+          className={styles.category}
+          onClick={() => {
+            setActiveTab("전체");
+            setCurrentPage(1);
+          }}
           style={{ cursor: "pointer" }}
         >
           {categoryTitle}
@@ -103,7 +119,9 @@ const Box = ({ tabs, categoryTitle }) => {
           {tabs.map((tab) => (
             <button
               key={tab}
-              className={`${styles.tabButton} ${activeTab === tab ? styles.active : ""}`}
+              className={`${styles.tabButton} ${
+                activeTab === tab ? styles.active : ""
+              }`}
               onClick={() => {
                 setActiveTab(tab);
                 setCurrentPage(1);
@@ -130,17 +148,29 @@ const Box = ({ tabs, categoryTitle }) => {
           </thead>
           <tbody>
             {currentPosts.length > 0 ? (
-              currentPosts.map((post) => (
-                <tr key={post.id} onClick={() => handlePostClick(post.id)} style={{ cursor: "pointer" }}>
-                  <td>{post.title || "-"}</td>
-                  <td>{post.language || "-"}</td>  
-                  <td>{post.nickname || "익명"}</td>  {/* ✅ Firestore에서 가져온 닉네임 표시 */}
-                  <td>{post.commentsCount}</td>  {/* ✅ 실시간 댓글 개수 표시 */}
-                  <td>{post.likes !== undefined ? post.likes : "-"}</td>
-                  <td>{post.level || "-"}</td>
-                  <td>{post.createdAt ? new Date(post.createdAt.seconds * 1000).toLocaleDateString() : "-"}</td>
-                </tr>
-              ))
+              <>
+                {currentPosts.map((post) => (
+                  <tr
+                    key={post.id}
+                    onClick={() => handlePostClick(post.id)}
+                    style={{ cursor: "pointer" }}
+                  >
+                    <td>{post.title || "-"}</td>
+                    <td>{post.language || "-"}</td>
+                    <td>{post.nickname || "익명"}</td>
+                    <td>{post.commentsCount}</td>
+                    <td>{post.likes !== undefined ? post.likes : "-"}</td>
+                    <td>{post.level || "-"}</td>
+                    <td>
+                      {post.createdAt
+                        ? new Date(
+                            post.createdAt.seconds * 1000
+                          ).toLocaleDateString()
+                        : "-"}
+                    </td>
+                  </tr>
+                ))}
+              </>
             ) : (
               <tr>
                 <td colSpan="7">게시글이 없습니다.</td>
@@ -152,15 +182,29 @@ const Box = ({ tabs, categoryTitle }) => {
 
       {filteredPosts.length > 0 && (
         <div className={styles.pagination}>
-          <button disabled={currentPage === 1} onClick={() => setCurrentPage(currentPage - 1)}>이전</button>
+          <button
+            disabled={currentPage === 1}
+            onClick={() => setCurrentPage(currentPage - 1)}
+          >
+            이전
+          </button>
           <span className={styles.pageNumbers}>
             {Array.from({ length: totalPages }, (_, i) => (
-              <button key={i + 1} onClick={() => setCurrentPage(i + 1)} className={currentPage === i + 1 ? styles.activePage : ""}>
+              <button
+                key={i + 1}
+                onClick={() => setCurrentPage(i + 1)}
+                className={currentPage === i + 1 ? styles.activePage : ""}
+              >
                 {i + 1}
               </button>
             ))}
           </span>
-          <button disabled={currentPage === totalPages} onClick={() => setCurrentPage(currentPage + 1)}>다음</button>
+          <button
+            disabled={currentPage === totalPages}
+            onClick={() => setCurrentPage(currentPage + 1)}
+          >
+            다음
+          </button>
         </div>
       )}
 
