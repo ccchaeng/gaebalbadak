@@ -17,7 +17,7 @@
     height: 130px;
 
     border-radius: 50%;
-  
+
     overflow: hidden;
   }
 
@@ -31,23 +31,42 @@
     font-size: 18px;
   }
 
+  .buttonContainer {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+  }
+
   .editButton,
-  .saveButton {
-    width: 30%;
-    padding: 8px 16px;
-    margin-top: 20px;
-
-    background-color: #7FD1AE;
-    border-radius: 6px;
-
-    cursor: pointer;
-    transition: background-color 0.3s;
-
+  .saveButton,
+  .logoutButton {
+    flex: 1;
+    max-width: 120px;
+    padding: 10px 0;
+    text-align: center;
     font-size: 14px;
     font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .editButton,
+  .saveButton {
+    background-color: #7FD1AE;
 
     &:hover {
       background-color: #6db696;
+    }
+  }
+
+  .logoutButton {
+    background-color: #a7a7a7;
+
+    &:hover {
+      background-color: #6e6e6e;
     }
   }
 }
