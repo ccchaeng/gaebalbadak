@@ -57,6 +57,26 @@
     border-radius: 10px;
 }
 
+.changeImageButton {
+    width: 30%;
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: background-color 0.3s ease-in-out;
+
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.8);
+    }
+}
+
 .uploadButton {
     width: 60px;
     height: 60px;
@@ -91,3 +111,40 @@
     border-radius: 5px;
     cursor: pointer;
 }
+
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.editButton, .deleteButton {
+    padding: 8px 15px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    text-align: center;
+    width: 80px;
+}
+
+.editButton {
+    background-color: #7fc8a9;
+    color: white;
+
+    &:hover {
+        background-color: #6fb89a;
+    }
+}
+
+.deleteButton {
+    background-color: #ff6b6b;
+    color: white;
+
+    &:hover {
+        background-color: #e05a5a;
+    }
+}
+
