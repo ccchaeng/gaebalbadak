@@ -95,32 +95,32 @@ function QuestionDetailContainer() {
       <div className={styles.commentsSection}>
         <h3>댓글</h3>
         {comments.length > 0 ? (
-         <ul className={styles.commentsList}>
-         {comments.map((comment) => (
-           <li key={comment.id} className={styles.commentItem}>
-             {/* ✅ 프로필 이미지 표시 */}
-             <ProfileImage 
-               photoURL={comment.profileImage} 
-               nickname={comment.nickname} 
-               className={styles.profileImage}
-             />
-       
-             {/* ✅ 닉네임 & 댓글 내용 */}
-             <div className={styles.commentContentBox}>
-               <div className={styles.commentHeader}>
-                 <span className={styles.nickname}>{comment.nickname}</span>
-                 <span className={styles.commentDate}>
-                   {comment.createdAt?.seconds
-                     ? new Date(comment.createdAt.seconds * 1000).toLocaleString()
-                     : "방금 전"}
-                 </span>
-               </div>
-               <p className={styles.commentContent}>{comment.content}</p>
-             </div>
-           </li>
-         ))}
-       </ul>
-              
+          <ul className={styles.commentsList}>
+            {comments.map((comment) => (
+              <li key={comment.id} className={styles.commentItem}>
+                {/* ✅ 프로필 이미지 표시 */}
+                <ProfileImage
+                  photoURL={comment.profileImage}
+                  nickname={comment.nickname}
+                  className={styles.profileImage}
+                />
+
+                {/* ✅ 닉네임 & 댓글 내용 */}
+                <div className={styles.commentContentBox}>
+                  <div className={styles.commentHeader}>
+                    <span className={styles.nickname}>{comment.nickname}</span>
+                    <span className={styles.commentDate}>
+                      {comment.createdAt?.seconds
+                        ? new Date(comment.createdAt.seconds * 1000).toLocaleString()
+                        : "방금 전"}
+                    </span>
+                  </div>
+                  <p className={styles.commentContent}>{comment.content}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+
         ) : (
           <p>아직 댓글이 없습니다.</p>
         )}
