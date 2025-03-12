@@ -183,10 +183,12 @@ function QuestionDetailContainer() {
                   {/* 댓글 수정 및 삭제 버튼 */}
                   {currentUserId === comment.userId && (
                     <div className={styles.commentActions}>
-                      {editingComment !== comment.id && (
-                        <Button text="수정" className={styles.editButton} onClick={() => handleEditComment(comment)}/>
-                      )}
-                      <Button text="삭제" className={styles.deleteButton} onClick={() => handleDeleteComment(comment.id)}/>
+                      {editingComment !== comment.id ? (
+                        <>
+                          <Button text="수정" className={styles.editButton} onClick={() => handleEditComment(comment)} />
+                          <Button text="삭제" className={styles.deleteButton} onClick={() => handleDeleteComment(comment.id)} />
+                        </>
+                      ) : null}
                     </div>
                   )}
                 </div>
