@@ -1,10 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
-import { getDoc, doc } from "firebase/firestore";
-import { db } from "../../firebase";
-import { addComment, listenToComments } from "../../firebaseUtils"; // ✅ 댓글 기능 추가
 import styles from "./QuestionDetailContainer.module.scss";
+
+// Firebase
+import { getDoc, doc } from "firebase/firestore";
+import { db, auth } from "../../firebase";
+import { onAuthStateChanged } from "firebase/auth";
+import { addComment, listenToComments, editComment, deleteComment } from "../../firebaseUtils"; // ✅ 댓글 기능 추가
+
+// 컴포넌트
 import ProfileImage from "./ProfileImage";
+import Button from "./Button";
 
 function QuestionDetailContainer() {
   const { postId } = useParams();
@@ -13,6 +19,10 @@ function QuestionDetailContainer() {
   const [post, setPost] = useState(null);
   const [comments, setComments] = useState([]); // ✅ 댓글 상태 추가
   const [commentText, setCommentText] = useState(""); // ✅ 댓글 입력 상태
+
+  const [currentUserId, setCurrentUserId] = useState(null);
+  const [editingComment, setEditingComment] = useState(null);
+  const [editedText, setEditedText] = useState("");
 
   const boardType = location.pathname.startsWith("/collaboration")
     ? "posts_collaboration"
@@ -46,11 +56,51 @@ function QuestionDetailContainer() {
     return () => unsubscribe(); // ✅ 언마운트 시 Firestore 구독 해제
   }, [postId, boardType]);
 
+  // 현재 로그인한 사용자의 ID 가져오기
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setCurrentUserId(user.uid);
+      } else {
+        setCurrentUserId(null);
+      }
+    });
+  
+    return () => unsubscribe();
+  }, []);
+
   // ✅ 댓글 추가 핸들러
   const handleAddComment = async () => {
     if (!commentText.trim()) return;
     await addComment(postId, boardType, commentText);
     setCommentText(""); // ✅ 입력 후 초기화
+  };
+
+  // 댓글 수정 핸들러
+  const handleEditComment = (comment) => {
+    setEditingComment(comment.id);
+    setEditedText(comment.content);
+  };
+
+  const handleSaveEdit = async (commentId) => {
+    if (!editedText.trim()) return;
+
+    try {
+      await editComment(postId, boardType, commentId, editedText);
+      setEditingComment(null);
+      setEditedText("");
+    } catch (error) {
+      console.log("handleSaveEdit, 댓글 수정 실패: ", error);
+    }
+  };
+
+  // 댓글 삭제 핸들러
+  const handleDeleteComment = async (commentId) => {
+    try {
+      await deleteComment(postId, boardType, commentId);
+    } catch (error) {
+      console.log("handleDeleteComment, 댓글 삭제 실패: ", error);
+    }
   };
 
   // ✅ 로딩 화면
@@ -115,7 +165,30 @@ function QuestionDetailContainer() {
                         : "방금 전"}
                     </span>
                   </div>
-                  <p className={styles.commentContent}>{comment.content}</p>
+
+                  {/* 댓글 수정 모드 */}
+                  {editingComment === comment.id ? (
+                    <div className={styles.editMode}>
+                      <textarea
+                        value={editedText}
+                        onChange={(e) => setEditedText(e.target.value)}
+                      />
+                      <Button text="저장" onClick={() => handleSaveEdit(comment.id)} />
+                      <Button text="취소" onClick={() => setEditingComment(null)}/>
+                    </div>
+                  ) : (
+                    <p className={styles.commentContent}>{comment.content}</p>
+                  )}
+
+                  {/* 댓글 수정 및 삭제 버튼 */}
+                  {currentUserId === comment.userId && (
+                    <div className={styles.commentActions}>
+                      {editingComment !== comment.id && (
+                        <Button text="수정" className={styles.editButton} onClick={() => handleEditComment(comment)}/>
+                      )}
+                      <Button text="삭제" className={styles.deleteButton} onClick={() => handleDeleteComment(comment.id)}/>
+                    </div>
+                  )}
                 </div>
               </li>
             ))}

@@ -8,6 +8,8 @@ import {
   query,
   orderBy,
   onSnapshot,
+  updateDoc,
+  deleteDoc,
 } from "firebase/firestore";
 
 /**
@@ -115,3 +117,37 @@ export const listenToComments = (postId, boardType, setComments) => {
     return () => {};
   }
 };
+
+// 댓글 수정
+
+export const editComment = async (postId, boardType, commentId, newContent) => {
+  if(!postId || !commentId || !newContent.trim()) return;
+
+  try {
+    const commentRef = doc(db, boardType, postId, "comments", commentId);
+    await updateDoc(commentRef, { // 수정된 댓글로 업데이트
+      content: newContent,
+    });
+
+    console.log("댓글 수정 완료");
+  } catch (error) {
+    console.log("댓글 수정 실패: ", error.message);
+  }
+};
+
+// 댓글 삭제
+export const deleteComment = async (postId, boardType, commentId) => {
+  if(!postId || !commentId) return;
+
+  const confirmDelete = window.confirm("댓글을 삭제하시겠습니까?");
+  if(!confirmDelete) return;
+
+  try {
+    const commentRef = doc(db, boardType, postId, "comments", commentId);
+    await deleteDoc(commentRef);
+
+    console.log("댓글 삭제 완료");
+  } catch (error) {
+    console.log("댓글 삭제 실패: ", error.message);
+  }
+}
