@@ -173,8 +173,8 @@ function QuestionDetailContainer() {
                         value={editedText}
                         onChange={(e) => setEditedText(e.target.value)}
                       />
-                      <Button text="저장" onClick={() => handleSaveEdit(comment.id)} />
-                      <Button text="취소" onClick={() => setEditingComment(null)}/>
+                      <Button text="저장" className={styles.saveButton} onClick={() => handleSaveEdit(comment.id)} />
+                      <Button text="취소" className={styles.cancelButton} onClick={() => setEditingComment(null)}/>
                     </div>
                   ) : (
                     <p className={styles.commentContent}>{comment.content}</p>
