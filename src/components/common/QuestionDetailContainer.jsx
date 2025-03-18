@@ -173,8 +173,8 @@ function QuestionDetailContainer() {
                         value={editedText}
                         onChange={(e) => setEditedText(e.target.value)}
                       />
-                      <Button text="저장" onClick={() => handleSaveEdit(comment.id)} />
-                      <Button text="취소" onClick={() => setEditingComment(null)}/>
+                      <Button text="저장" className={styles.saveButton} onClick={() => handleSaveEdit(comment.id)} />
+                      <Button text="취소" className={styles.cancelButton} onClick={() => setEditingComment(null)}/>
                     </div>
                   ) : (
                     <p className={styles.commentContent}>{comment.content}</p>
@@ -183,10 +183,12 @@ function QuestionDetailContainer() {
                   {/* 댓글 수정 및 삭제 버튼 */}
                   {currentUserId === comment.userId && (
                     <div className={styles.commentActions}>
-                      {editingComment !== comment.id && (
-                        <Button text="수정" className={styles.editButton} onClick={() => handleEditComment(comment)}/>
-                      )}
-                      <Button text="삭제" className={styles.deleteButton} onClick={() => handleDeleteComment(comment.id)}/>
+                      {editingComment !== comment.id ? (
+                        <>
+                          <Button text="수정" className={styles.editButton} onClick={() => handleEditComment(comment)} />
+                          <Button text="삭제" className={styles.deleteButton} onClick={() => handleDeleteComment(comment.id)} />
+                        </>
+                      ) : null}
                     </div>
                   )}
                 </div>

@@ -171,11 +171,12 @@
 }
 
 .commentActions {
+  margin-left: 1000px;
   display: flex;
   gap: 8px; // 버튼 사이 간격
-  margin-top: 5px;
 
   button {
+    width: 90px;
     background-color: #f0f0f0;
     border: none;
     padding: 5px 10px;
@@ -183,31 +184,36 @@
     border-radius: 5px;
     font-size: 14px;
     transition: 0.2s ease-in-out;
-
-    &:hover {
-      background-color: #e0e0e0;
-    }
   }
 
   .editButton {
-    color: #1976d2;
+    background-color: #7fc8a9;
+
+    &:hover {
+      background-color: #6fb89a;
+    }
   }
 
   .deleteButton {
-    color: #d32f2f;
+    background-color: #ff6b6b;
+
+    &:hover {
+      background-color: #e05a5a;
+    }
   }
 }
 
 .editMode {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 5px;
   margin-top: 8px;
 
   textarea {
-    width: 100%;
+    width: 1100px;
     height: 60px;
     padding: 8px;
+    margin: auto;
     font-size: 14px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -215,7 +221,10 @@
   }
 
   button {
-    width: auto;
+    width: 8%;
+    height: 10%;
+    margin: auto;
+    margin-top: 50px;
     padding: 5px 10px;
     border-radius: 5px;
     font-size: 14px;
@@ -223,14 +232,22 @@
   }
 
   .saveButton {
-    background-color: #1976d2;
-    color: white;
+    background-color: #7fc8a9;
+    color: black;
     border: none;
+
+    &:hover {
+      background-color: #6fb89a;
+    }
   }
 
   .cancelButton {
-    background-color: #f44336;
-    color: white;
+    background-color: #ff6b6b;
+    color: black;
     border: none;
+
+    &:hover {
+      background-color: #e05a5a;
+    }
   }
 }
