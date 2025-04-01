@@ -32,6 +32,7 @@ function App() {
           <Route path="/write2" element={<WriteQuestion2 />} />
           <Route path="/write3" element={<WriteQuestion3 />} />
           <Route path="/apply/:postId" element={<ApplyDetail />} />
+          <Route path="/profile/:userId" element={<Profile />} />
         </Route>
 
         {/* Layout이 필요 없는 개별 페이지 */}

@@ -1,4 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams } from "react-router-dom"
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '../firebase';
 import styles from "./Profile.module.scss";
 
 import useAuth from "../hooks/useAuth"; // 현재 로그인된 사용자의 uid 가져오기 위함
@@ -12,11 +15,34 @@ import ProfileBio from '../components/common/ProfileBio';
 import ProfileProject from '../components/common/ProfileProject';
 
 const Profile = () => {
-  const { user } = useAuth();
+  const { userId } = useParams();
+  const { user: loggedInUser } = useAuth();
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      if (!userId) return;
+
+      try {
+        const userRef = doc(db, "users", userId);
+        const userSnap = await getDoc(userRef);
+        if (userSnap.exists()) {
+          setUser({ uid: userId, ...userSnap.data() });
+        } else {
+          console.error("사용자 정보를 찾을 수 없습니다.");
+        }
+      } catch (error) {
+        console.error("사용자 정보 불러오기 오류:", error);
+      }
+    };
+
+    fetchUserInfo();
+  }, [userId]);
 
   if (!user) {
-    return <p>로그인이 필요합니다.</p>;
+    return <p>사용자 정보를 불러오는 중입니다...</p>;
   }
+
 
   return (
     <div className={styles.profileContainer}>
