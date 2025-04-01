@@ -65,7 +65,7 @@ function QuestionDetailContainer() {
         setCurrentUserId(null);
       }
     });
-  
+
     return () => unsubscribe();
   }, []);
 
@@ -149,11 +149,13 @@ function QuestionDetailContainer() {
             {comments.map((comment) => (
               <li key={comment.id} className={styles.commentItem}>
                 {/* ✅ 프로필 이미지 표시 */}
-                <ProfileImage
-                  photoURL={comment.profileImage}
-                  nickname={comment.nickname}
-                  className={styles.profileImage}
-                />
+                <div onClick={() => navigate(`/profile/${comment.userId}`)}>
+                  <ProfileImage
+                    photoURL={comment.profileImage}
+                    nickname={comment.nickname}
+                    className={styles.profileImage}
+                  />
+                </div>
 
                 {/* ✅ 닉네임 & 댓글 내용 */}
                 <div className={styles.commentContentBox}>
@@ -174,7 +176,7 @@ function QuestionDetailContainer() {
                         onChange={(e) => setEditedText(e.target.value)}
                       />
                       <Button text="저장" className={styles.saveButton} onClick={() => handleSaveEdit(comment.id)} />
-                      <Button text="취소" className={styles.cancelButton} onClick={() => setEditingComment(null)}/>
+                      <Button text="취소" className={styles.cancelButton} onClick={() => setEditingComment(null)} />
                     </div>
                   ) : (
                     <p className={styles.commentContent}>{comment.content}</p>
